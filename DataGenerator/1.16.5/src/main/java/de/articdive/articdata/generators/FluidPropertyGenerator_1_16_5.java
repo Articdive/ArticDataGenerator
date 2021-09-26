@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ScanResult;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -11,22 +13,16 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluid;
-import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class FluidPropertyGenerator_1_16_5 extends DataGenerator_1_16_5<Property<?>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FluidPropertyGenerator_1_16_5.class);
-    private static final Reflections REFLECTIONS = new Reflections(new ConfigurationBuilder()
-            .setUrls(ClasspathHelper.forPackage("net.minecraft.world.level.material"))
-            .setScanners(new SubTypesScanner()));
+    private static final ScanResult REFLECTIONS = new ClassGraph().acceptPackages("net.minecraft.world.level.material").scan();
 
     @Override
     public void generateNames() {
-        for (final Class<? extends Fluid> fluid : REFLECTIONS.getSubTypesOf(Fluid.class)) {
+        for (final Class<? extends Fluid> fluid : REFLECTIONS.getSubclasses(Fluid.class).loadClasses(Fluid.class)) {
             for (final Field declaredField : fluid.getDeclaredFields()) {
                 if (!Modifier.isStatic(declaredField.getModifiers())) continue;
                 if (!Property.class.isAssignableFrom(declaredField.getType())) continue;
@@ -44,7 +40,7 @@ public final class FluidPropertyGenerator_1_16_5 extends DataGenerator_1_16_5<Pr
     @Override
     public JsonElement generate() {
         final JsonObject fluidProperties = new JsonObject();
-        for (final Class<? extends Fluid> fluid : REFLECTIONS.getSubTypesOf(Fluid.class)) {
+        for (final Class<? extends Fluid> fluid : REFLECTIONS.getSubclasses(Fluid.class).loadClasses(Fluid.class)) {
             for (final Field declaredField : fluid.getDeclaredFields()) {
                 if (!Modifier.isStatic(declaredField.getModifiers())) continue;
                 if (!Property.class.isAssignableFrom(declaredField.getType())) continue;

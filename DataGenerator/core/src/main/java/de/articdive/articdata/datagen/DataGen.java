@@ -93,6 +93,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.ENTITIES, "EntityGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENTITY_DATA_SERIALIZERS, "EntityDataSerializerGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.FLUIDS, "FluidGenerator_1_16_5");
+                DataGenHolder.addGenerator(DataGenType.FLUID_PROPERTIES, "FluidPropertyGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.MATERIALS, "MaterialGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.MAP_COLORS, "MapColorGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.PARTICLES, "ParticleGenerator_1_16_5");
