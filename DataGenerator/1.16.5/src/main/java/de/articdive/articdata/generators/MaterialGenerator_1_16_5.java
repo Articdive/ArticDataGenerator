@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.level.block.Block;
@@ -49,6 +50,7 @@ public final class MaterialGenerator_1_16_5 extends DataGenerator_1_16_5<Item> {
             JsonObject item = new JsonObject();
             item.addProperty("id", Registry.ITEM.getId(i));
             item.addProperty("mojangName", names.get(i));
+            item.addProperty("rarity", i.getRarity(ItemStack.EMPTY).name()); // We want the rarity property here
             item.addProperty("translationKey", i.getDescriptionId());
             item.addProperty("depletes", i.canBeDepleted());
             item.addProperty("maxStackSize", i.getMaxStackSize());
