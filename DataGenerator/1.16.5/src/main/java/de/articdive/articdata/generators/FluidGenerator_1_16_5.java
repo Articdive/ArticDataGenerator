@@ -97,6 +97,7 @@ public final class FluidGenerator_1_16_5 extends DataGenerator_1_16_5<Fluid> {
 
                     fluidStates.add(state);
                 }
+                fluid.add("states", fluidStates);
             }
 
             fluids.add(fluidRL.toString(), fluid);
