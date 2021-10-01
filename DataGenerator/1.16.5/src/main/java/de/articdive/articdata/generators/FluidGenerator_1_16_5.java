@@ -56,6 +56,7 @@ public final class FluidGenerator_1_16_5 extends DataGenerator_1_16_5<Fluid> {
             fluid.addProperty("empty", f.defaultFluidState().isEmpty());
             fluid.addProperty("randomlyTicking", f.defaultFluidState().isRandomlyTicking());
             fluid.addProperty("explosionResistance", f.defaultFluidState().getExplosionResistance());
+            fluid.addProperty("defaultStateId", Fluid.FLUID_STATE_REGISTRY.getId(f.defaultFluidState()));
 
             {
                 final JsonArray properties = new JsonArray();
