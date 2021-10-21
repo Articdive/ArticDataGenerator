@@ -23,7 +23,7 @@ tasks {
                 filter(org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf("mcVersion" to mcVersion))
                 exclude("gradle/wrapper/gradle-wrapper.jar")
             }
-            // The JAR gets corrupted the version filter runs over it.
+            // The JAR gets corrupted when the version filter runs over it.
             from(rootDir.resolve("${rootProject.projectDir}/includedFiles")) {
                 include("gradle/wrapper/gradle-wrapper.jar")
             }
@@ -83,6 +83,10 @@ fun getVersionsRequiredForCompile(version: String): ArrayList<String> {
         "1.17",
         "1.17.1" -> {
             return arrayListOf("1.17", "1.16.5")
+        }
+        // 1.18 (uses some 1.16.5, 1.17 generators
+        "1.18" -> {
+            return arrayListOf("1.18", "1.17", "1.16.5")
         }
         // Attempt with 1.16.5
         else -> {

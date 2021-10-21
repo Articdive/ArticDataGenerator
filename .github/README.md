@@ -82,14 +82,14 @@ dependencies {
 
 ## Usage
 
-The repository artifacts include the data located [here](https://github.com/Articdive/ArticData)
+The repository artifacts include the data located [here](https://github.com/Articdive/ArticData).
 
 They include JSON files full of useful data to do with Minecraft.
 
 ## Supported Data
 We emit data in two ways:
-- One JSON Object with namespaced identifiers as keys for json objects. [Example](../Articdata/1.17/1_17_blocks.json)
-- One JSON Array with many json objects. [Example](../Articdata/1.17/1_17_map_colors.json)
+- One JSON Object with namespaced identifiers as keys for json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.17.1/1_17_1_blocks.json)
+- One JSON Array with many json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.17.1/1_17_1_map_colors.json)
 
 If you require any data, open a GitHub Issue and specify the data you need.
 
@@ -114,8 +114,8 @@ WARNING: There is no guarantee that the format of the data will stay the same.
 | Namespace ID              | :heavy_check_mark: | 1.16+        |
 | Mojang Name               | :heavy_check_mark: | 1.16+        |
 | Humidity                  | :heavy_check_mark: | 1.16+        |
-| Scale                     | :heavy_check_mark: | 1.16+        |
-| Depth                     | :heavy_check_mark: | 1.16+        |
+| Scale                     | :heavy_check_mark: | 1.16 - 1.17  |
+| Depth                     | :heavy_check_mark: | 1.16 - 1.17  |
 | Temperature               | :heavy_check_mark: | 1.16+        |
 | Percipitation             | :heavy_check_mark: | 1.16+        |
 | Downfall                  | :heavy_check_mark: | 1.16+        |

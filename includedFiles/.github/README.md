@@ -39,7 +39,7 @@ Java. The generators for this data are located [here](https://github.com/Articdi
 
 ### Maven and Gradle
 
-To add ArticData (not the generator) to your project using [Maven](http://maven.apache.org/)
+To add ArticData (not the generators!) to your project using [Maven](http://maven.apache.org/)
 or [Gradle](https://gradle.org/):
 
 Repository (Maven):
@@ -114,8 +114,8 @@ WARNING: There is no guarantee that the format of the data will stay the same.
 | Namespace ID              | :heavy_check_mark: | 1.16+        |
 | Mojang Name               | :heavy_check_mark: | 1.16+        |
 | Humidity                  | :heavy_check_mark: | 1.16+        |
-| Scale                     | :heavy_check_mark: | 1.16+        |
-| Depth                     | :heavy_check_mark: | 1.16+        |
+| Scale                     | :heavy_check_mark: | 1.16 - 1.17  |
+| Depth                     | :heavy_check_mark: | 1.16 - 1.17  |
 | Temperature               | :heavy_check_mark: | 1.16+        |
 | Percipitation             | :heavy_check_mark: | 1.16+        |
 | Downfall                  | :heavy_check_mark: | 1.16+        |

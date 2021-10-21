@@ -4,10 +4,11 @@ plugins {
 
 dependencies {
     implementation(project(":DataGenerator:1.16.5"))
+    implementation(project(":DataGenerator:1.17"))
     implementation(project(":DataGenerator:core"))
 }
 
 minecraft {
-    version("1.17")
+    version("21w42a")
     platform(org.spongepowered.gradle.vanilla.repository.MinecraftPlatform.SERVER)
 }
