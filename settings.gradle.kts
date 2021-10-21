@@ -1,5 +1,4 @@
 rootProject.name = "ArticData"
-include("Deobfuscator")
 // DataGenerator
 include("DataGenerator")
 

@@ -12,7 +12,7 @@ subprojects {
         "implementation"("org.apache.logging.log4j:log4j-core:2.14.0")
         // SLF4J is the base logger for most libraries, therefore we can hook it into log4j2.
         "implementation"("org.apache.logging.log4j:log4j-slf4j-impl:2.14.0")
-        "implementation"("com.google.code.gson:gson:2.8.7")
+        "implementation"("com.google.code.gson:gson:2.8.8")
         "implementation"("io.github.classgraph:classgraph:4.8.116")
     }
 }
