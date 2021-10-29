@@ -2,6 +2,7 @@ package de.articdive.articdata.generators;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
@@ -10,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
 public final class EntityDataSerializerGenerator_1_16_5 extends DataGenerator_1_16_5<EntityDataSerializer<?>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(EntityDataSerializerGenerator_1_16_5.class);
 

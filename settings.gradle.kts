@@ -1,6 +1,9 @@
-rootProject.name = "ArticData"
+rootProject.name = "ArticDataGenerator"
 // DataGenerator
 include("DataGenerator")
+
+include("DataGenerator:VersionHolder")
+findProject(":DataGenerator:VersionHolder")?.name = "VersionHolder"
 
 include("DataGenerator:core")
 findProject(":DataGenerator:core")?.name = "core"

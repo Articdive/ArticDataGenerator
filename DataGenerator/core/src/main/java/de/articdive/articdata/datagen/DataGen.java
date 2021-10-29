@@ -166,7 +166,7 @@ public class DataGen {
         if (args.length >= 2) {
             outputFolder = new File(args[1]);
         }
-        DataGenHolder.runGenerators(new JsonOutputter(versionPrefix, outputFolder));
+        DataGenHolder.runGenerators(new FileOutputHandler(versionPrefix, outputFolder));
 
         LOGGER.info("Output data in: " + outputFolder.getAbsolutePath());
     }

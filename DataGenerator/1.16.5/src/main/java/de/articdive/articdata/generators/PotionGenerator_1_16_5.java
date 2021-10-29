@@ -1,6 +1,7 @@
 package de.articdive.articdata.generators;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.util.Set;
 
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
 public final class PotionGenerator_1_16_5 extends DataGenerator_1_16_5<Potion> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PotionGenerator_1_16_5.class);
 

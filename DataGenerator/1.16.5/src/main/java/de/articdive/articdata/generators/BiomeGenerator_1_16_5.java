@@ -1,6 +1,7 @@
 package de.articdive.articdata.generators;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -15,8 +16,28 @@ import java.lang.reflect.Field;
 import java.util.Optional;
 import java.util.Set;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Humidity", supported = true)
+@GeneratorEntry(name = "Scale", supported = true)
+@GeneratorEntry(name = "Depth", supported = true)
+@GeneratorEntry(name = "Temperature", supported = true)
+@GeneratorEntry(name = "Percipitation", supported = true)
+@GeneratorEntry(name = "Downfall", supported = true)
+@GeneratorEntry(name = "Fog Color", supported = true)
+@GeneratorEntry(name = "Water Color", supported = true)
+@GeneratorEntry(name = "Water Fog Color", supported = true)
+@GeneratorEntry(name = "Sky Color", supported = true)
+@GeneratorEntry(name = "Grass Color", supported = true)
+@GeneratorEntry(name = "Grass Color Modifier", supported = true)
+@GeneratorEntry(name = "Foliage Color", supported = true)
+@GeneratorEntry(name = "Foliage Color Override", supported = true)
+@GeneratorEntry(name = "Category", supported = true)
 public final class BiomeGenerator_1_16_5 extends DataGenerator_1_16_5<ResourceKey<Biome>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(BiomeGenerator_1_16_5.class);
+
+    @SuppressWarnings("unchecked")
     @Override
     public void generateNames() {
         for (Field declaredField : Biomes.class.getDeclaredFields()) {

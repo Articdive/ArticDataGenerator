@@ -2,6 +2,7 @@ package de.articdive.articdata.generators;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,18 @@ import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Translation Key", supported = true)
+@GeneratorEntry(name = "Max Level", supported = true)
+@GeneratorEntry(name = "Rarity", supported = true)
+@GeneratorEntry(name = "Curse", supported = true)
+@GeneratorEntry(name = "Discoverable", supported = true)
+@GeneratorEntry(name = "Tradeable", supported = true)
+@GeneratorEntry(name = "Treasure Only", supported = true)
+@GeneratorEntry(name = "Category", supported = true)
+@GeneratorEntry(name = "Incompatible Enchantments", supported = true)
 public final class EnchantmentGenerator_1_16_5 extends DataGenerator_1_16_5<Enchantment> {
     private static final Logger LOGGER = LoggerFactory.getLogger(EnchantmentGenerator_1_16_5.class);
 

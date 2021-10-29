@@ -2,6 +2,7 @@ package de.articdive.articdata.generators;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +24,43 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Set;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Translation Key", supported = true)
+@GeneratorEntry(name = "Loot Table Key", supported = true)
+@GeneratorEntry(name = "Block States", supported = true)
+@GeneratorEntry(name = "BlockState Properties", supported = true)
+@GeneratorEntry(name = "Block Entities", supported = true)
+@GeneratorEntry(name = "Hardness", supported = true)
+@GeneratorEntry(name = "Explosion Resistance", supported = true)
+@GeneratorEntry(name = "Friction", supported = true)
+@GeneratorEntry(name = "Speed & Jump Factor", supported = true)
+@GeneratorEntry(name = "Default Block State", supported = true)
+@GeneratorEntry(name = "Corresponding Item", supported = true)
+@GeneratorEntry(name = "Corresponding Map Color", supported = true)
+@GeneratorEntry(name = "Solid, Liquid, Blocking etc.", supported = true)
+@GeneratorEntry(name = "Piston Push Reaction", supported = true)
+@GeneratorEntry(name = "Gravity", supported = true)
+@GeneratorEntry(name = "Respawn Eligiblity", supported = true)
+@GeneratorEntry(name = "Tool Require For Drops", supported = true)
+@GeneratorEntry(name = "Large Collision Shape", supported = true)
+@GeneratorEntry(name = "Collision Shape Full Block", supported = true)
+@GeneratorEntry(name = "Occlusion", supported = true)
+@GeneratorEntry(name = "Hitbox", supported = true)
+@GeneratorEntry(name = "Collision Hitbox", supported = true)
+@GeneratorEntry(name = "Interaction Hitbox", supported = true)
+@GeneratorEntry(name = "Occlusion Hitbox", supported = true)
+@GeneratorEntry(name = "Visual Hitbox", supported = true)
+@GeneratorEntry(name = "Dynamic Shape", supported = true)
+@GeneratorEntry(name = "Solid Render", supported = true)
+@GeneratorEntry(name = "Light Emission", supported = true)
+@GeneratorEntry(name = "Light Block", supported = true)
+@GeneratorEntry(name = "Propagates Skylight Down", supported = true)
+@GeneratorEntry(name = "Shape for Light Occlusion", supported = true)
+@GeneratorEntry(name = "Opacity", supported = true)
+@GeneratorEntry(name = "Conditional Opacity", supported = true)
+@GeneratorEntry(name = "Render Shape", supported = true)
 public final class BlockGenerator_1_16_5 extends DataGenerator_1_16_5<Block> {
     private static final Logger LOGGER = LoggerFactory.getLogger(BlockGenerator_1_16_5.class);
 

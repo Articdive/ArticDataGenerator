@@ -2,7 +2,9 @@ package de.articdive.articdata.generators;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
+import java.lang.reflect.Field;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -11,8 +13,9 @@ import net.minecraft.world.level.block.state.properties.Property;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Key", supported = true)
+@GeneratorEntry(name = "Possible Values", supported = true)
 public final class BlockPropertyGenerator_1_16_5 extends DataGenerator_1_16_5<Property<?>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(BlockPropertyGenerator_1_16_5.class);
 

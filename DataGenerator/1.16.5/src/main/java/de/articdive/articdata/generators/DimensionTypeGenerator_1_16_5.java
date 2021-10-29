@@ -1,6 +1,7 @@
 package de.articdive.articdata.generators;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -10,6 +11,18 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Set;
 
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Bed Works", supported = true)
+@GeneratorEntry(name = "Coordinate Scale", supported = true)
+@GeneratorEntry(name = "Ceiling Height", supported = true)
+@GeneratorEntry(name = "Fixed Time", supported = true)
+@GeneratorEntry(name = "Raids", supported = true)
+@GeneratorEntry(name = "Sky Light", supported = true)
+@GeneratorEntry(name = "Piglin Safe", supported = true)
+@GeneratorEntry(name = "Logical Height", supported = true)
+@GeneratorEntry(name = "Natural", supported = true)
+@GeneratorEntry(name = "Ultra Warm", supported = true)
+@GeneratorEntry(name = "Respawn Anchor Works", supported = true)
 public final class DimensionTypeGenerator_1_16_5 extends DataGenerator_1_16_5<DimensionType> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DimensionTypeGenerator_1_16_5.class);
 

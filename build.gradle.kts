@@ -4,7 +4,13 @@ version = "1.0"
 allprojects {
     version = "1.0"
 }
+
+plugins {
+    id("org.spongepowered.gradle.vanilla") version "0.2.1-SNAPSHOT" apply false
+}
+
 val supportedVersions = project.properties["supportedVersions"].toString().split(",").map(String::trim)
+
 tasks {
     var eulaCheck = false
     for (mcVersion in supportedVersions) {
@@ -18,10 +24,22 @@ tasks {
             (findProperty("output") ?: rootDir.resolve("ArticData").resolve(mcVersion).absolutePath) as String
 
         // Copy the data in /includedFiles to the directories
+        // Does some filtering to update versions and specific documentation.
         register<Copy>("copyExt_$mcVersion") {
+            val outputFile = File(outputPath)
+            val contentDocumentation = outputFile.resolve("CONTENT_DOCUMENTATION.md")
+            val toc = outputFile.resolve("TOC.md")
             from(rootDir.resolve("${rootProject.projectDir}/includedFiles")) {
-                filter(org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf("mcVersion" to mcVersion))
-                exclude("gradle/wrapper/gradle-wrapper.jar")
+                filter(
+                    org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf(
+                        "mcVersion" to mcVersion,
+                        "content_documentation" to if (contentDocumentation.exists()) contentDocumentation.readText(
+                            Charsets.UTF_8
+                        ) else "",
+                        "TOC" to if (toc.exists()) toc.readText(Charsets.UTF_8) else ""
+                    )
+                )
+                exclude("gradle/wrapper/gradle-wrapper.jar", "CONTENT_DOCUMENTATION.md", "TOC.md")
             }
             // The JAR gets corrupted when the version filter runs over it.
             from(rootDir.resolve("${rootProject.projectDir}/includedFiles")) {
@@ -56,11 +74,13 @@ tasks {
                 eulaCheck = true
             }
             // After using VanillaGradle the build process has significantly been simplified.
-
             // Run the DataGenerator
             dependsOn(
                 project(":DataGenerator").tasks.getByName<JavaExec>("run_$implementedVersion")
                     .setArgsString("$mcVersion $outputPath")
+                    // This gets a configuration containing the correct version's server JAR for the runtime classpath.
+                    // Located in VersionHolder just so that it does not have to be defined in every subproject individually.
+                    .classpath(project(":DataGenerator:VersionHolder").configurations.getByName("runtimeServer_$mcVersion"))
             ).finalizedBy("copyExt_$mcVersion")
         }
     }
@@ -93,6 +113,4 @@ fun getVersionsRequiredForCompile(version: String): ArrayList<String> {
             return arrayListOf("1.16.5")
         }
     }
-
 }
-

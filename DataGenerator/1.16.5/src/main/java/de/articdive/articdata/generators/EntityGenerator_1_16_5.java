@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.DataGenHolder;
 import de.articdive.articdata.datagen.DataGenType;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import net.minecraft.core.Registry;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -23,6 +24,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Translation Key", supported = true)
+@GeneratorEntry(name = "Loot Table Key", supported = true)
+@GeneratorEntry(name = "Entity Data Packet Info", supported = true)
+@GeneratorEntry(name = "Packet Type", supported = true)
+@GeneratorEntry(name = "Fire Immunity", supported = true)
+@GeneratorEntry(name = "Height", supported = true)
+@GeneratorEntry(name = "Width", supported = true)
+@GeneratorEntry(name = "Client Tracking Range", supported = true)
 public final class EntityGenerator_1_16_5 extends DataGenerator_1_16_5<EntityType<?>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(EntityGenerator_1_16_5.class);
     private static final Map<EntityType<?>, Class<?>> entityClasses = new HashMap<>();

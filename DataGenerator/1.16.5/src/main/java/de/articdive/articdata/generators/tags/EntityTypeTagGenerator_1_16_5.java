@@ -2,7 +2,8 @@ package de.articdive.articdata.generators.tags;
 
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import de.articdive.articdata.datagen.JsonOutputter;
+import de.articdive.articdata.datagen.FileOutputHandler;
+import de.articdive.articdata.datagen.annotations.NoGeneratorEntries;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@NoGeneratorEntries
 public final class EntityTypeTagGenerator_1_16_5 extends DataGenerator_1_16_5<Void> {
     private static final Logger LOGGER = LoggerFactory.getLogger(EntityTypeTagGenerator_1_16_5.class);
 
@@ -43,7 +45,7 @@ public final class EntityTypeTagGenerator_1_16_5 extends DataGenerator_1_16_5<Vo
                 }
                 JsonObject entityTypeTag;
                 try {
-                    entityTypeTag = JsonOutputter.GSON.fromJson(new JsonReader(new FileReader(file)), JsonObject.class);
+                    entityTypeTag = FileOutputHandler.GSON.fromJson(new JsonReader(new FileReader(file)), JsonObject.class);
                 } catch (FileNotFoundException e) {
                     LOGGER.error("Failed to read entity type tag located at '" + file + "'.", e);
                     continue;

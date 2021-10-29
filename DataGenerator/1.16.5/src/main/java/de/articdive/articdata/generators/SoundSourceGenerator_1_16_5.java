@@ -2,11 +2,15 @@ package de.articdive.articdata.generators;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Type", supported = true)
 public final class SoundSourceGenerator_1_16_5 extends DataGenerator_1_16_5<SoundSource> {
     private static final Logger LOGGER = LoggerFactory.getLogger(SoundSourceGenerator_1_16_5.class);
 

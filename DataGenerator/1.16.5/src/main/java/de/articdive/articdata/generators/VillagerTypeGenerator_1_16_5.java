@@ -1,16 +1,19 @@
 package de.articdive.articdata.generators;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
+import java.lang.reflect.Field;
+import java.util.Set;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-import java.util.Set;
-
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
 public final class VillagerTypeGenerator_1_16_5 extends DataGenerator_1_16_5<VillagerType> {
     private static final Logger LOGGER = LoggerFactory.getLogger(VillagerTypeGenerator_1_16_5.class);
 

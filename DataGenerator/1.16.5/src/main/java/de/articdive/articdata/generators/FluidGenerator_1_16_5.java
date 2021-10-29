@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.DataGenHolder;
 import de.articdive.articdata.datagen.DataGenType;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -19,6 +20,9 @@ import net.minecraft.world.level.material.Fluids;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Corresponding Bucket Item", supported = true)
 public final class FluidGenerator_1_16_5 extends DataGenerator_1_16_5<Fluid> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FluidGenerator_1_16_5.class);
 

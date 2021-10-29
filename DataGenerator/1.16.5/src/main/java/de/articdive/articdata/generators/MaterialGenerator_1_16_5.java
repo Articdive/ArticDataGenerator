@@ -3,6 +3,7 @@ package de.articdive.articdata.generators;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,19 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.Field;
 import java.util.Set;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Namespace ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Translation Key", supported = true)
+@GeneratorEntry(name = "Depletes", supported = true)
+@GeneratorEntry(name = "Max Stack Size", supported = true)
+@GeneratorEntry(name = "Max Damage (Durability)", supported = true)
+@GeneratorEntry(name = "Edible", supported = true)
+@GeneratorEntry(name = "Food Properties", supported = true)
+@GeneratorEntry(name = "Fire Resistant", supported = true)
+@GeneratorEntry(name = "Corresponding Block", supported = true)
+@GeneratorEntry(name = "Eating & Drinking Sound", supported = true)
+@GeneratorEntry(name = "Armor Properties", supported = true)
 public final class MaterialGenerator_1_16_5 extends DataGenerator_1_16_5<Item> {
     private static final Logger LOGGER = LoggerFactory.getLogger(MaterialGenerator_1_16_5.class);
 

@@ -1,9 +1,16 @@
 plugins {
-    id("org.spongepowered.gradle.vanilla") version "0.2.1-SNAPSHOT"
+    id("org.spongepowered.gradle.vanilla")
 }
 
 dependencies {
     implementation(project(":DataGenerator:core"))
+}
+
+configurations {
+    runtimeClasspath {
+        // We want to exclude the 1.16.5 JAR from the runtime, we include the version we want in the run options.
+        exclude("net.minecraft", "server")
+    }
 }
 
 minecraft {

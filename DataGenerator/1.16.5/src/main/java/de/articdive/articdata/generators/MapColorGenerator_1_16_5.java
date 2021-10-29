@@ -2,13 +2,16 @@ package de.articdive.articdata.generators;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
+import java.lang.reflect.Field;
 import net.minecraft.world.level.material.MaterialColor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Color (Decimal)", supported = true)
 public final class MapColorGenerator_1_16_5 extends DataGenerator_1_16_5<MaterialColor> {
     private static final Logger LOGGER = LoggerFactory.getLogger(MapColorGenerator_1_16_5.class);
 

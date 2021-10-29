@@ -2,18 +2,19 @@ package de.articdive.articdata.generators.loot_tables;
 
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import de.articdive.articdata.datagen.FileOutputHandler;
+import de.articdive.articdata.datagen.annotations.NoGeneratorEntries;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
-import de.articdive.articdata.datagen.JsonOutputter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+@NoGeneratorEntries
 public final class GameplayLootTableGenerator_1_16_5 extends DataGenerator_1_16_5<Void> {
     private static final Logger LOGGER = LoggerFactory.getLogger(GameplayLootTableGenerator_1_16_5.class);
 
@@ -42,7 +43,7 @@ public final class GameplayLootTableGenerator_1_16_5 extends DataGenerator_1_16_
                 }
                 JsonObject gameplayLootTable;
                 try {
-                    gameplayLootTable = JsonOutputter.GSON.fromJson(new JsonReader(new FileReader(file)), JsonObject.class);
+                    gameplayLootTable = FileOutputHandler.GSON.fromJson(new JsonReader(new FileReader(file)), JsonObject.class);
                 } catch (FileNotFoundException e) {
                     LOGGER.error("Failed to read gameplay loot table located at '" + file + "'.", e);
                     continue;
