@@ -26,20 +26,13 @@ tasks {
         // Copy the data in /includedFiles to the directories
         // Does some filtering to update versions and specific documentation.
         register<Copy>("copyExt_$mcVersion") {
-            val outputFile = File(outputPath)
-            val contentDocumentation = outputFile.resolve("CONTENT_DOCUMENTATION.md")
-            val toc = outputFile.resolve("TOC.md")
             from(rootDir.resolve("${rootProject.projectDir}/includedFiles")) {
                 filter(
                     org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf(
-                        "mcVersion" to mcVersion,
-                        "content_documentation" to if (contentDocumentation.exists()) contentDocumentation.readText(
-                            Charsets.UTF_8
-                        ) else "",
-                        "TOC" to if (toc.exists()) toc.readText(Charsets.UTF_8) else ""
+                        "mcVersion" to mcVersion
                     )
                 )
-                exclude("gradle/wrapper/gradle-wrapper.jar", "CONTENT_DOCUMENTATION.md", "TOC.md")
+                exclude("gradle/wrapper/gradle-wrapper.jar")
             }
             // The JAR gets corrupted when the version filter runs over it.
             from(rootDir.resolve("${rootProject.projectDir}/includedFiles")) {
@@ -48,6 +41,17 @@ tasks {
             into(File(outputPath))
             filteringCharset = "UTF-8"
             duplicatesStrategy = DuplicatesStrategy.INCLUDE
+            doLast {
+                val outputFile = File(outputPath)
+                val readmeFile = outputFile.resolve(".github").resolve("README.md")
+                var README = readmeFile.readText(Charsets.UTF_8)
+                README = README.replace(
+                    "@content_documentation@",
+                    outputFile.resolve("CONTENT_DOCUMENTATION.md").readText(Charsets.UTF_8)
+                )
+                README = README.replace("@TOC@", outputFile.resolve("TOC.md").readText(Charsets.UTF_8))
+                readmeFile.writeText(README, Charsets.UTF_8)
+            }
         }
 
         register("generateData_$mcVersion") {
