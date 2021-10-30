@@ -3,7 +3,7 @@ package de.articdive.articdata.generators;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
+import de.articdive.articdata.generators.common.DataGenerator_1_18;
 import java.lang.reflect.Field;
 import net.minecraft.world.level.material.MaterialColor;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
 @GeneratorEntry(name = "Color (Decimal)", supported = true)
-public final class MapColorGenerator_1_18 extends DataGenerator_1_16_5<MaterialColor> {
+public final class MapColorGenerator_1_18 extends DataGenerator_1_18<MaterialColor> {
     private static final Logger LOGGER = LoggerFactory.getLogger(MapColorGenerator_1_18.class);
 
     @Override

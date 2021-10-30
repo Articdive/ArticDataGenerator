@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.DataGenHolder;
 import de.articdive.articdata.datagen.DataGenType;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
+import de.articdive.articdata.generators.common.DataGenerator_1_18;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import org.slf4j.Logger;
@@ -62,9 +61,10 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Opacity", supported = true)
 @GeneratorEntry(name = "Conditional Opacity", supported = true)
 @GeneratorEntry(name = "Render Shape", supported = true)
+@GeneratorEntry(name = "Offset", supported = true)
 @GeneratorEntry(name = "Sound Information", supported = true)
-public final class BlockGenerator_1_16_5 extends DataGenerator_1_16_5<Block> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BlockGenerator_1_16_5.class);
+public final class BlockGenerator_1_18 extends DataGenerator_1_18<Block> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlockGenerator_1_18.class);
 
     @Override
     public void generateNames() {
@@ -104,6 +104,10 @@ public final class BlockGenerator_1_16_5 extends DataGenerator_1_16_5<Block> {
             block.addProperty("dynamicShape", b.hasDynamicShape());
             block.addProperty("defaultStateId", Block.BLOCK_STATE_REGISTRY.getId(b.defaultBlockState()));
             block.addProperty("lootTableLocation", b.getLootTable().toString());
+            block.addProperty("offsetType", b.getOffsetType().name());
+            block.addProperty("verticalOffset", b.getMaxVerticalOffset());
+            block.addProperty("horizontalOffset", b.getMaxHorizontalOffset());
+            block.addProperty("defaultHardness", b.defaultDestroyTime());
 
             Item correspondingItem = Item.BY_BLOCK.getOrDefault(b, null);
             if (correspondingItem != null) {
@@ -165,32 +169,20 @@ public final class BlockGenerator_1_16_5 extends DataGenerator_1_16_5<Block> {
                     state.addProperty("solid", bs.getMaterial().isSolid());
                     state.addProperty("solidBlocking", bs.getMaterial().isSolidBlocking());
                     state.addProperty("toolRequired", bs.requiresCorrectToolForDrops());
+                    state.addProperty("randomlyTicks", bs.isRandomlyTicking());
                     {
                         JsonObject sounds = new JsonObject();
-                        {
-                            try {
-                                Field breakSoundF = SoundType.class.getDeclaredField("breakSound");
-                                Field hitSoundF = SoundType.class.getDeclaredField("hitSound");
-                                breakSoundF.setAccessible(true);
-                                hitSoundF.setAccessible(true);
-
-                                SoundEvent breakSound = (SoundEvent) breakSoundF.get(bs.getSoundType());
-                                SoundEvent hitSound = (SoundEvent) hitSoundF.get(bs.getSoundType());
-
-                                sounds.addProperty("breakSound", soundNames.get(breakSound));
-                                sounds.addProperty("hitSound", soundNames.get(hitSound));
-                            } catch (IllegalAccessException | NoSuchFieldException e) {
-                                LOGGER.error("Failed to access block sounds.", e);
-                            }
-                        }
+                        sounds.addProperty("breakSound", soundNames.get(bs.getSoundType().getBreakSound()));
                         sounds.addProperty("stepSound", soundNames.get(bs.getSoundType().getStepSound()));
                         sounds.addProperty("fallSound", soundNames.get(bs.getSoundType().getFallSound()));
                         sounds.addProperty("placeSound", soundNames.get(bs.getSoundType().getPlaceSound()));
+                        sounds.addProperty("hitSound", soundNames.get(bs.getSoundType().getHitSound()));
                         sounds.addProperty("pitch", bs.getSoundType().getPitch());
                         sounds.addProperty("volume", bs.getSoundType().getVolume());
 
                         state.add("sounds", sounds);
                     }
+
                     // Shapes (Hitboxes)
                     state.addProperty("largeCollisionShape", bs.hasLargeCollisionShape());
                     state.addProperty("collisionShapeFullBlock", bs.isCollisionShapeFullBlock(EmptyBlockGetter.INSTANCE, BlockPos.ZERO));
