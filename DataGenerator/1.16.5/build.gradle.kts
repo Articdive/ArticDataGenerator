@@ -13,6 +13,12 @@ configurations {
     }
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(16))
+    }
+}
+
 minecraft {
     version("1.16.5")
     platform(org.spongepowered.gradle.vanilla.repository.MinecraftPlatform.SERVER)

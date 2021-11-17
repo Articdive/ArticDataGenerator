@@ -15,6 +15,12 @@ configurations {
     }
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 minecraft {
     version(rootProject.properties["1.18_alias"].toString())
     platform(org.spongepowered.gradle.vanilla.repository.MinecraftPlatform.SERVER)
