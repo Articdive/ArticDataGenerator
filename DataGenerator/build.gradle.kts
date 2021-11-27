@@ -19,23 +19,22 @@ val implementedVersions = rootProject.properties["implementedVersions"].toString
 tasks {
     for (implementedVersion in implementedVersions) {
         register<JavaExec>("run_$implementedVersion") {
-            val implementedProject = project(":DataGenerator:$implementedVersion")
             dependsOn(
-                implementedProject.tasks.getByName<Jar>("jar"),
+                project(":DataGenerator:$implementedVersion").tasks.getByName<Jar>("jar"),
             )
             mainClass.set("de.articdive.articdata.datagen.DataGen")
 
             javaLauncher.set(
-                implementedProject.extensions.getByType<JavaToolchainService>().launcherFor(
-                    implementedProject.extensions.getByType<JavaPluginExtension>().toolchain
+                project(":DataGenerator:$implementedVersion").extensions.getByType<JavaToolchainService>().launcherFor(
+                    project(":DataGenerator:$implementedVersion").extensions.getByType<JavaPluginExtension>().toolchain
                 )
             )
             var classpath: FileCollection = project.objects.fileCollection()
             // Includes all the runtime classes that the core & version require. (DataGen classes, Logger, Gson etc.)
             // This includes the core since the versioned subprojects inherit core.
-            classpath += implementedProject.configurations.getByName("runtimeClasspath")
+            classpath += project(":DataGenerator:$implementedVersion").configurations.getByName("runtimeClasspath")
             // Includes the generators itself.
-            classpath += implementedProject.tasks.getByName<Jar>("jar").outputs.files
+            classpath += project(":DataGenerator:$implementedVersion").tasks.getByName<Jar>("jar").outputs.files
             // We receive the runtime JAR from the parent call in the main build.gradle.kts
             setClasspath(classpath)
         }

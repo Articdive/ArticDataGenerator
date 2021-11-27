@@ -12,7 +12,6 @@ plugins {
 val supportedVersions = project.properties["supportedVersions"].toString().split(",").map(String::trim)
 
 tasks {
-    var eulaCheck = false
     for (mcVersion in supportedVersions) {
         val compileVersions = getVersionsRequiredForCompile(mcVersion)
         if (!compileVersions.contains(mcVersion)) {
@@ -58,28 +57,6 @@ tasks {
             group = "articdata"
             description = "Generate game data for Minecraft $mcVersion."
 
-            if (!eulaCheck) {
-                logger.warn("Mojang requires all source-code and mappings used to be governed by the Minecraft EULA.")
-                logger.warn("Please read the Minecraft EULA located at https://account.mojang.com/documents/minecraft_eula.")
-                logger.warn("In order to agree to the EULA you must create a file called eula.txt with the text 'eula=true'.")
-                val eulaTxt = File("${rootProject.projectDir}/eula.txt")
-                logger.warn("The file must be located at '${eulaTxt.absolutePath}'.")
-                if ((eulaTxt.exists() && eulaTxt.readText(Charsets.UTF_8)
-                        .equals("eula=true", true)) || project.properties["eula"].toString().toBoolean()
-                ) {
-                    logger.warn("")
-                    logger.warn("The EULA has been accepted and signed.")
-                    logger.warn("")
-                } else {
-                    throw GradleException("Data generation has been halted as the EULA has not been signed.")
-                }
-                logger.warn("It is unclear if the data from the data generator also adhere to the Minecraft EULA.")
-                logger.warn("Please consult your own legal team!")
-                logger.warn("All data is given independently without warranty, guarantee or liability of any kind.")
-                logger.warn("The data may or may not be the intellectual property of Mojang Studios.")
-                logger.warn("")
-                eulaCheck = true
-            }
             // After using VanillaGradle the build process has significantly been simplified.
             // Run the DataGenerator
             dependsOn(
@@ -89,13 +66,6 @@ tasks {
                     // Located in VersionHolder just so that it does not have to be defined in every subproject individually.
                     .classpath(project(":DataGenerator:VersionHolder").configurations.getByName("runtimeServer_$mcVersion"))
             ).finalizedBy("copyExt_$mcVersion")
-        }
-    }
-    register("generateAllData") {
-        group = "articdata"
-        description = "Generate game data for all supported Minecraft versions."
-        for (mcVersion in supportedVersions) {
-            dependsOn("generateData_$mcVersion")
         }
     }
 }

@@ -85,8 +85,8 @@ WARNING: There is no guarantee that the format of the data will stay the same.
 
 ## Contributing
 
-See [the contributing file](CONTRIBUTING.md)!
+See [the contributing file](https://github.com/Articdive/ArticDataGenerator/blob/main/.github/CONTRIBUTING.md)!
 
 ## License
-
-[MIT License © Articdive ](../LICENSE)
+Data is licensed under the [Minecraft EULA](https://account.mojang.com/documents/minecraft_eula).
+The rest (Format, Generators, etc.) is licensed under the [MIT License © Articdive](../LICENSE).
