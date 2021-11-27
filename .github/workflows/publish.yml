@@ -17,8 +17,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Generate data for all versions
-      run: ./gradlew generateAllData -Peula=true
+    - name: Generate 1.16.3 data
+      run: ./gradlew --no-daemon generateData_1.16.3 -Peula=true
 
     - name: Push 1.16.3 Data
       uses: cpina/github-action-push-to-another-repository@v1.3
@@ -31,6 +31,9 @@ jobs:
         destination-repository-name: "ArticData"
         target-branch: "1.16.3"
 
+    - name: Generate 1.16.4 data
+      run: ./gradlew --no-daemon generateData_1.16.4 -Peula=true
+
     - name: Push 1.16.4 Data
       uses: cpina/github-action-push-to-another-repository@v1.3
       env:
@@ -41,6 +44,9 @@ jobs:
         destination-github-username: "Articdive"
         destination-repository-name: "ArticData"
         target-branch: "1.16.4"
+
+    - name: Generate 1.16.5 data
+      run: ./gradlew --no-daemon generateData_1.16.5 -Peula=true
 
     - name: Push 1.16.5 Data
       uses: cpina/github-action-push-to-another-repository@v1.3
@@ -53,6 +59,9 @@ jobs:
         destination-repository-name: "ArticData"
         target-branch: "1.16.5"
 
+    - name: Generate 1.17 data
+      run: ./gradlew --no-daemon generateData_1.17 -Peula=true
+
     - name: Push 1.17 Data
       uses: cpina/github-action-push-to-another-repository@v1.3
       env:
@@ -64,6 +73,9 @@ jobs:
         destination-repository-name: "ArticData"
         target-branch: "1.17"
 
+    - name: Generate 1.17.1 data
+      run: ./gradlew --no-daemon generateData_1.17.1 -Peula=true
+
     - name: Push 1.17.1 Data
       uses: cpina/github-action-push-to-another-repository@v1.3
       env:
@@ -74,6 +86,9 @@ jobs:
         destination-github-username: "Articdive"
         destination-repository-name: "ArticData"
         target-branch: "1.17.1"
+
+    - name: Generate 1.18 data
+      run: ./gradlew --no-daemon generateData_1.18 -Peula=true
 
     - name: Push 1.18 Data
       uses: cpina/github-action-push-to-another-repository@v1.3
