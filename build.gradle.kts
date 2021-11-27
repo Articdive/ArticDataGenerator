@@ -55,6 +55,9 @@ tasks {
         }
 
         register("generateData_$mcVersion") {
+            group = "articdata"
+            description = "Generate game data for Minecraft $mcVersion."
+
             if (!eulaCheck) {
                 logger.warn("Mojang requires all source-code and mappings used to be governed by the Minecraft EULA.")
                 logger.warn("Please read the Minecraft EULA located at https://account.mojang.com/documents/minecraft_eula.")
@@ -86,6 +89,13 @@ tasks {
                     // Located in VersionHolder just so that it does not have to be defined in every subproject individually.
                     .classpath(project(":DataGenerator:VersionHolder").configurations.getByName("runtimeServer_$mcVersion"))
             ).finalizedBy("copyExt_$mcVersion")
+        }
+    }
+    register("generateAllData") {
+        group = "articdata"
+        description = "Generate game data for all supported Minecraft versions."
+        for (mcVersion in supportedVersions) {
+            dependsOn("generateData_$mcVersion")
         }
     }
 }
