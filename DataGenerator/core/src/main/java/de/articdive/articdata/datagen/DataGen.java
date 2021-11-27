@@ -169,6 +169,7 @@ public class DataGen {
         DataGenHolder.runGenerators(new FileOutputHandler(versionPrefix, outputFolder));
 
         LOGGER.info("Output data in: " + outputFolder.getAbsolutePath());
+        System.exit(0);
     }
 
     enum Version {
