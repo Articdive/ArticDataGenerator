@@ -16,7 +16,6 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        architexture: 'x86'
 
     - name: Generate 1.16.4 data
       run: gradle --no-daemon clean cleanAllMinecraft generateData_1.16.4
