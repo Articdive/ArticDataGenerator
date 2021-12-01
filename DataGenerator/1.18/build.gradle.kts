@@ -23,6 +23,6 @@ java {
 }
 
 minecraft {
-    version(rootProject.properties["1.18_alias"].toString())
+    version("1.18")
     platform(org.spongepowered.gradle.vanilla.repository.MinecraftPlatform.SERVER)
 }
