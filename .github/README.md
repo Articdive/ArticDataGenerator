@@ -23,41 +23,34 @@ Java.
 To add ArticData (not the generators!) to your project using [Maven](http://maven.apache.org/)
 or [Gradle](https://gradle.org/):
 
-Repository (Maven):
+Adding to a Maven Project:
 
-```
-<repository>
-    <id>jitpack</id>
-    <url>https://jitpack.io</url>
-</repository>
+```xml
+
+<repositories>
+    <repository>
+        <id>krypton-repo</id>
+        <url>https://repo.kryptonmc.org/releases</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>de.articdive</groupId>
+        <artifactId>articdata</artifactId>
+        <version>1.18.1-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 ```
 
-Dependency (Maven):
+Adding to a Gradle Project (Kotlin DSL)
 
-```
-<dependency>
-    <groupId>com.github.Articdive</groupId>
-    <artifactId>ArticData</artifactId>
-    <version>1.17.1-SNAPSHOT</version>
-</dependency>
-```
-
-Repository (Gradle Kotlin DSL)
-
-```
+```kotlin
 repositories {
-    maven {
-        name = "jitpack"
-        url = uri("https://jitpack.io")
-    }
+    maven("https://repo.kryptonmc.org/releases")
 }
-```
-
-Dependency (Gradle Kotlin DSL)
-
-```
 dependencies {
-    implementation("com.github.Articdive:ArticData:1.17.1-SNAPSHOT")
+    implementation("de.articdive:articdata:1.18.1-SNAPSHOT")
 }
 ```
 
@@ -69,8 +62,8 @@ They include JSON files full of useful data to do with Minecraft.
 
 ## Supported Data
 We emit data in two ways:
-- One JSON Object with namespaced identifiers as keys for json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.17.1/1_17_1_blocks.json)
-- One JSON Array with many json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.17.1/1_17_1_map_colors.json)
+- One JSON Object with namespaced identifiers as keys for json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.18.1/1_18_1_blocks.json)
+- One JSON Array with many json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.18.1/1_18_1_map_colors.json)
 
 If you require any data, open a GitHub Issue and specify the data you need.
 

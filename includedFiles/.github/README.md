@@ -25,41 +25,34 @@ Java. The generators for this data are located [here](https://github.com/Articdi
 To add ArticData (not the generators!) to your project using [Maven](http://maven.apache.org/)
 or [Gradle](https://gradle.org/):
 
-Repository (Maven):
+RAdding to a Maven Project:
 
-```
-<repository>
-    <id>jitpack</id>
-    <url>https://jitpack.io</url>
-</repository>
+```xml
+
+<repositories>
+    <repository>
+        <id>krypton-repo</id>
+        <url>https://repo.kryptonmc.org/releases</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <dependency>
+        <groupId>de.articdive</groupId>
+        <artifactId>articdata</artifactId>
+        <version>@mcVersion@-SNAPSHOT</version>
+    </dependency>
+</dependencies>
 ```
 
-Dependency (Maven):
+Adding to a Gradle Project (Kotlin DSL)
 
-```
-<dependency>
-    <groupId>com.github.Articdive</groupId>
-    <artifactId>ArticData</artifactId>
-    <version>1.17.1-SNAPSHOT</version>
-</dependency>
-```
-
-Repository (Gradle Kotlin DSL)
-
-```
+```kotlin
 repositories {
-    maven {
-        name = "jitpack"
-        url = uri("https://jitpack.io")
-    }
+    maven("https://repo.kryptonmc.org/releases")
 }
-```
-
-Dependency (Gradle Kotlin DSL)
-
-```
 dependencies {
-    implementation("com.github.Articdive:ArticData:1.17.1-SNAPSHOT")
+    implementation("de.articdive:articdata:@mcVersion@-SNAPSHOT")
 }
 ```
 
