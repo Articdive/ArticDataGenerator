@@ -28,7 +28,7 @@ public class DataGen {
         String versionPrefix = args[0].replace('.', '_') + "_";
 
         switch (version) {
-            case MC_1_18 -> {
+            case MC_1_18, MC_1_18_1 -> {
                 // Run 1.18
                 try {
                     Class<?> dgCommon1_18 = Class.forName("de.articdive.articdata.generators.common.DataGenerator_1_18");
@@ -180,7 +180,8 @@ public class DataGen {
         MC_1_16_5,
         MC_1_17,
         MC_1_17_1,
-        MC_1_18;
+        MC_1_18,
+        MC_1_18_1;
 
         public static Version parseVersion(String versionInput) {
             switch (versionInput) {
@@ -210,6 +211,9 @@ public class DataGen {
                 }
                 case "1.18" -> {
                     return MC_1_18;
+                }
+                case "1.18.1" -> {
+                    return MC_1_18_1;
                 }
             }
             return null;
