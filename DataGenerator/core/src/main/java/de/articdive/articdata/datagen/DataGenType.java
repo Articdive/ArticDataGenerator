@@ -8,6 +8,7 @@ public enum DataGenType {
     BLOCK_PROPERTIES("block_properties", "Block Properties"),
     CUSTOM_STATISTICS("custom_statistics", "Custom Statistics"),
     DIMENSION_TYPES("dimension_types", "Dimension Types"),
+    DYE_COLORS("dye_colors", "Dye Colors"),
     ENCHANTMENTS("enchantments", "Enchantments"),
     ENTITIES("entities", "Entities"),
     ENTITY_DATA_SERIALIZERS("entity_data_serializers", "Entity Data Serializers"),

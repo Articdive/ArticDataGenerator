@@ -34,11 +34,15 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Max Stack Size", supported = true)
 @GeneratorEntry(name = "Max Damage (Durability)", supported = true)
 @GeneratorEntry(name = "Edible", supported = true)
-@GeneratorEntry(name = "Food Properties", supported = true)
 @GeneratorEntry(name = "Fire Resistant", supported = true)
 @GeneratorEntry(name = "Corresponding Block", supported = true)
 @GeneratorEntry(name = "Eating & Drinking Sound", supported = true)
+@GeneratorEntry(name = "Food Properties", supported = true)
 @GeneratorEntry(name = "Armor Properties", supported = true)
+@GeneratorEntry(name = "Spawn Egg Properties", supported = true)
+@GeneratorEntry(name = "Tool Properties", supported = true)
+@GeneratorEntry(name = "Bucket Properties", supported = true)
+@GeneratorEntry(name = "Dye Properties", supported = true)
 public final class MaterialGenerator_1_16_5 extends DataGenerator_1_16_5<Item> {
     private static final Logger LOGGER = LoggerFactory.getLogger(MaterialGenerator_1_16_5.class);
 
@@ -159,6 +163,7 @@ public final class MaterialGenerator_1_16_5 extends DataGenerator_1_16_5<Item> {
                 }
                 // Dye Properties
                 if (i instanceof DyeItem) {
+
                     JsonObject bucketItemProperties = new JsonObject();
                     bucketItemProperties.addProperty(
                             "dyeColor",

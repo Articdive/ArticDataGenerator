@@ -46,6 +46,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.BLOCK_PROPERTIES, "BlockPropertyGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.CUSTOM_STATISTICS, "CustomStatisticGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.DIMENSION_TYPES, "DimensionTypeGenerator_1_17");
+                DataGenHolder.addGenerator(DataGenType.DYE_COLORS, "DyeColorGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENCHANTMENTS, "EnchantmentGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENTITIES, "EntityGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENTITY_DATA_SERIALIZERS, "EntityDataSerializerGenerator_1_16_5");
@@ -90,6 +91,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.BLOCK_PROPERTIES, "BlockPropertyGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.CUSTOM_STATISTICS, "CustomStatisticGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.DIMENSION_TYPES, "DimensionTypeGenerator_1_17");
+                DataGenHolder.addGenerator(DataGenType.DYE_COLORS, "DyeColorGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENCHANTMENTS, "EnchantmentGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENTITIES, "EntityGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENTITY_DATA_SERIALIZERS, "EntityDataSerializerGenerator_1_16_5");
@@ -134,6 +136,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.BLOCKS, "BlockGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.CUSTOM_STATISTICS, "CustomStatisticGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.DIMENSION_TYPES, "DimensionTypeGenerator_1_16_5");
+                DataGenHolder.addGenerator(DataGenType.DYE_COLORS, "DyeColorGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENCHANTMENTS, "EnchantmentGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENTITIES, "EntityGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.ENTITY_DATA_SERIALIZERS, "EntityDataSerializerGenerator_1_16_5");
