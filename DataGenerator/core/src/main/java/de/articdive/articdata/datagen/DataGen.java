@@ -1,5 +1,6 @@
 package de.articdive.articdata.datagen;
 
+import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,16 +20,16 @@ public class DataGen {
             LOGGER.info("You must specify a version to generate data for.");
             return;
         }
-        Version version = Version.parseVersion(args[0]);
-        if (version == null) {
+        String version = args[0].toLowerCase(Locale.ROOT).replace('_', '.');
+        if (!version.matches("\\d+\\.\\d+") && !version.matches("\\d+\\.\\d+\\.\\d+")) {
             LOGGER.error("The version specified is not explicitly defined.");
             LOGGER.error("The generator will fallback to 1.16.5 and attempt to use its generators.");
-            version = Version.MC_1_16_5;
+            version = "1.16.5";
         }
-        String versionPrefix = args[0].replace('.', '_') + "_";
-
-        switch (version) {
-            case MC_1_18, MC_1_18_1 -> {
+        String versionPrefix = version.replace('.', '_') + "_";
+        // Try to ensure the format X.X.X.
+        switch (args[0].toLowerCase(Locale.ROOT).replace('_', '.')) {
+            case "1.18", "1.18.1" -> {
                 // Run 1.18
                 try {
                     Class<?> dgCommon1_18 = Class.forName("de.articdive.articdata.generators.common.DataGenerator_1_18");
@@ -72,7 +73,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.ENTITY_LOOT_TABLES, "loot_tables.EntityLootTableGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.GAMEPLAY_LOOT_TABLES, "loot_tables.GameplayLootTableGenerator_1_16_5");
             }
-            case MC_1_17, MC_1_17_1 -> {
+            case "1.17", "1.17.1" -> {
                 // Run 1.17
                 try {
                     Class<?> dgCommon1_17 = Class.forName("de.articdive.articdata.generators.common.DataGenerator_1_17");
@@ -116,7 +117,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.ENTITY_LOOT_TABLES, "loot_tables.EntityLootTableGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.GAMEPLAY_LOOT_TABLES, "loot_tables.GameplayLootTableGenerator_1_16_5");
             }
-            case MC_1_16, MC_1_16_1, MC_1_16_2, MC_1_16_3, MC_1_16_4, MC_1_16_5 -> {
+            case "1.16", "1.16.1", "1.16.2", "1.16.3", "1.16.4", "1.16.5" -> {
                 // Run 1.16_5
                 try {
                     Class<?> dgCommon1_16_5 = Class.forName("de.articdive.articdata.generators.common.DataGenerator_1_16_5");
@@ -169,54 +170,5 @@ public class DataGen {
         DataGenHolder.runGenerators(new FileOutputHandler(versionPrefix, outputFolder));
 
         LOGGER.info("Output data in: " + outputFolder.getAbsolutePath());
-    }
-
-    enum Version {
-        MC_1_16,
-        MC_1_16_1,
-        MC_1_16_2,
-        MC_1_16_3,
-        MC_1_16_4,
-        MC_1_16_5,
-        MC_1_17,
-        MC_1_17_1,
-        MC_1_18,
-        MC_1_18_1;
-
-        public static Version parseVersion(String versionInput) {
-            switch (versionInput) {
-                case "1.16" -> {
-                    return MC_1_16;
-                }
-                case "1.16.1" -> {
-                    return MC_1_16_1;
-                }
-                case "1.16.2" -> {
-                    return MC_1_16_2;
-                }
-                case "1.16.3" -> {
-                    return MC_1_16_3;
-                }
-                case "1.16.4" -> {
-                    return MC_1_16_4;
-                }
-                case "1.16.5" -> {
-                    return MC_1_16_5;
-                }
-                case "1.17" -> {
-                    return MC_1_17;
-                }
-                case "1.17.1" -> {
-                    return MC_1_17_1;
-                }
-                case "1.18" -> {
-                    return MC_1_18;
-                }
-                case "1.18.1" -> {
-                    return MC_1_18_1;
-                }
-            }
-            return null;
-        }
     }
 }

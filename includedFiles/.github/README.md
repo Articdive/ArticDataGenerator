@@ -40,7 +40,7 @@ RAdding to a Maven Project:
     <dependency>
         <groupId>de.articdive</groupId>
         <artifactId>articdata</artifactId>
-        <version>@mcVersion@-SNAPSHOT</version>
+        <version>@mcVersion@</version>
     </dependency>
 </dependencies>
 ```
@@ -52,7 +52,7 @@ repositories {
     maven("https://repo.kryptonmc.org/releases")
 }
 dependencies {
-    implementation("de.articdive:articdata:@mcVersion@-SNAPSHOT")
+    implementation("de.articdive:articdata:@mcVersion@")
 }
 ```
 

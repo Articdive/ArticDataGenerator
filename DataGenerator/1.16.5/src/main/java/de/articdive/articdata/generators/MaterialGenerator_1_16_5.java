@@ -3,23 +3,28 @@ package de.articdive.articdata.generators;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.common.DataGenerator_1_16_5;
+import java.lang.reflect.Field;
+import java.util.Set;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.util.Set;
 
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
@@ -111,23 +116,58 @@ public final class MaterialGenerator_1_16_5 extends DataGenerator_1_16_5<Item> {
                 }
                 item.add("foodProperties", foodProperties);
             }
-            // Armor properties
-            if (i instanceof ArmorItem ai) {
+            // Custom Properties for the different types of ItemStack
+            {
+                JsonObject specificItemData = new JsonObject();
+                // Armor properties
+                if (i instanceof ArmorItem ai) {
 
-                JsonObject armorProperties = new JsonObject();
-                armorProperties.addProperty("defense", ai.getDefense());
-                armorProperties.addProperty("toughness", ai.getToughness());
-                armorProperties.addProperty("slot", ai.getSlot().getName());
+                    JsonObject armorProperties = new JsonObject();
+                    armorProperties.addProperty("defense", ai.getDefense());
+                    armorProperties.addProperty("toughness", ai.getToughness());
+                    armorProperties.addProperty("slot", ai.getSlot().getName());
 
-                item.add("armorProperties", armorProperties);
-            }
-            // SpawnEgg properties
-            if (i instanceof SpawnEggItem sei) {
+                    specificItemData.add("armorProperties", armorProperties);
+                }
+                // SpawnEgg properties
+                if (i instanceof SpawnEggItem sei) {
 
-                JsonObject spawnEggProperties = new JsonObject();
-                spawnEggProperties.addProperty("entityType", Registry.ENTITY_TYPE.getKey(sei.getType(null)).toString());
+                    JsonObject spawnEggProperties = new JsonObject();
+                    spawnEggProperties.addProperty("entityType", Registry.ENTITY_TYPE.getKey(sei.getType(null)).toString());
 
-                item.add("spawnEggProperties", spawnEggProperties);
+                    specificItemData.add("spawnEggProperties", spawnEggProperties);
+                }
+                // TieredItem Properties
+                if (i instanceof TieredItem) {
+
+                    JsonObject tieredItemProperties = new JsonObject();
+                    tieredItemProperties.addProperty("tier", ((Tiers) ((TieredItem) i).getTier()).name());
+
+                    specificItemData.add("tieredItemProperties", tieredItemProperties);
+                }
+                // Bucket Properties
+                if (i instanceof BucketItem) {
+
+                    JsonObject bucketItemProperties = new JsonObject();
+                    Fluid f = ReflectionHelper.getHiddenField(Fluid.class, "content", BucketItem.class, (BucketItem) i);
+                    bucketItemProperties.addProperty(
+                            "fluid",
+                            Registry.FLUID.getKey(f).toString()
+                    );
+
+                    specificItemData.add("bucketItemProperties", bucketItemProperties);
+                }
+                // Dye Properties
+                if (i instanceof DyeItem) {
+                    JsonObject bucketItemProperties = new JsonObject();
+                    bucketItemProperties.addProperty(
+                            "dyeColor",
+                            ((DyeItem) i).getDyeColor().getName()
+                    );
+
+                    specificItemData.add("dyeItemProperties", bucketItemProperties);
+                }
+                item.add("specificItemData", specificItemData);
             }
 
             items.add(itemRL.toString(), item);
