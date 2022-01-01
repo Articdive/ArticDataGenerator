@@ -29,7 +29,7 @@ tasks {
                 filter(
                     org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf(
                         "mcVersion" to mcVersion,
-                        "mcVersionGit" to mcVersion + rootDir.resolve("git_reference_id.txt").readText(Charsets.UTF_8).trim()
+                        "mcVersionGit" to mcVersion + if (rootDir.resolve("git_reference_id.txt").exists()) rootDir.resolve("git_reference_id.txt").readText(Charsets.UTF_8).trim() else "4661a768" // This should fail the GitHub CI, as the repo does not redeploy versions.
                     )
                 )
                 exclude("gradle/wrapper/gradle-wrapper.jar")
