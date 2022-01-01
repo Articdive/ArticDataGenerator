@@ -28,7 +28,8 @@ tasks {
             from(rootDir.resolve("includedFiles")) {
                 filter(
                     org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf(
-                        "mcVersion" to mcVersion + rootDir.resolve("git_reference_id.txt").readText(Charsets.UTF_8).trim()
+                        "mcVersion" to mcVersion,
+                        "mcVersionGit" to mcVersion + rootDir.resolve("git_reference_id.txt").readText(Charsets.UTF_8).trim()
                     )
                 )
                 exclude("gradle/wrapper/gradle-wrapper.jar")

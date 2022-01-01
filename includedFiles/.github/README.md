@@ -25,7 +25,7 @@ Java. The generators for this data are located [here](https://github.com/Articdi
 To add ArticData (not the generators!) to your project using [Maven](http://maven.apache.org/)
 or [Gradle](https://gradle.org/):
 
-RAdding to a Maven Project:
+Adding to a Maven Project:
 
 ```xml
 
@@ -40,7 +40,7 @@ RAdding to a Maven Project:
     <dependency>
         <groupId>de.articdive</groupId>
         <artifactId>articdata</artifactId>
-        <version>@mcVersion@</version>
+        <version>@mcVersionGit@</version>
     </dependency>
 </dependencies>
 ```
@@ -52,7 +52,7 @@ repositories {
     maven("https://repo.kryptonmc.org/releases")
 }
 dependencies {
-    implementation("de.articdive:articdata:@mcVersion@")
+    implementation("de.articdive:articdata:@mcVersionGit@")
 }
 ```
 
