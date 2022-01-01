@@ -38,7 +38,7 @@ Adding to a Maven Project:
     <dependency>
         <groupId>de.articdive</groupId>
         <artifactId>articdata</artifactId>
-        <version>1.18.1-SNAPSHOT</version>
+        <version>1.18.1</version>
     </dependency>
 </dependencies>
 ```
@@ -50,7 +50,7 @@ repositories {
     maven("https://repo.kryptonmc.org/releases")
 }
 dependencies {
-    implementation("de.articdive:articdata:1.18.1-SNAPSHOT")
+    implementation("de.articdive:articdata:1.18.1")
 }
 ```
 

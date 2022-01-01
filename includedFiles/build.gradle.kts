@@ -27,7 +27,7 @@ publishing {
     repositories {
         maven {
             name = "krypton-repo"
-            url = uri("https://repo.kryptonmc.org")
+            url = uri("https://repo.kryptonmc.org/releases")
             credentials {
                 username = System.getenv("KRYPTON_REPO_CREDS_USR")
                 password = System.getenv("KRYPTON_REPO_CREDS_PSW")
