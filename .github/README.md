@@ -38,7 +38,7 @@ Adding to a Maven Project:
     <dependency>
         <groupId>de.articdive</groupId>
         <artifactId>articdata</artifactId>
-        <version>1.18.1</version>
+        <version>1.18.1-${COMMIT::8}</version>
     </dependency>
 </dependencies>
 ```
@@ -50,9 +50,11 @@ repositories {
     maven("https://repo.kryptonmc.org/releases")
 }
 dependencies {
-    implementation("de.articdive:articdata:1.18.1")
+    implementation("de.articdive:articdata:-${COMMIT::8}")
 }
 ```
+Replace COMMIT::8 with the first 8 chars of the [**Generator** commit](https://github.com/Articdive/ArticDataGenerator/commits/main) you would like to use.  
+Please note that GitHub shows the first 7 chars.
 
 ## Usage
 

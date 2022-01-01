@@ -17,6 +17,9 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Inject Commit Revision
+      run: "echo \"-${GITHUB_SHA::8}\" >> git_reference_id.txt"
+
     - name: Generate 1.18.1 data
       run: gradle clean cleanAllMinecraft generateData_1.18.1
 

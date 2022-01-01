@@ -25,16 +25,16 @@ tasks {
         // Copy the data in /includedFiles to the directories
         // Does some filtering to update versions and specific documentation.
         register<Copy>("copyExt_$mcVersion") {
-            from(rootDir.resolve("${rootProject.projectDir}/includedFiles")) {
+            from(rootDir.resolve("includedFiles")) {
                 filter(
                     org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf(
-                        "mcVersion" to mcVersion
+                        "mcVersion" to mcVersion + rootDir.resolve("git_reference_id.txt").readText(Charsets.UTF_8).trim()
                     )
                 )
                 exclude("gradle/wrapper/gradle-wrapper.jar")
             }
             // The JAR gets corrupted when the version filter runs over it.
-            from(rootDir.resolve("${rootProject.projectDir}/includedFiles")) {
+            from(rootDir.resolve("includedFiles")) {
                 include("gradle/wrapper/gradle-wrapper.jar")
             }
             into(File(outputPath))
