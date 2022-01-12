@@ -20,6 +20,7 @@ public enum DataGenType {
     MOB_EFFECTS("potion_effects", "Potion Effects"),
     PARTICLES("particles", "Particles"),
     POTIONS("potions", "Potions"),
+    RECIPES("recipes", "Recipes"),
     SOUNDS("sounds", "Sounds"),
     SOUND_SOURCES("sound_sources", "Sound Sources"),
     VILLAGER_PROFESSIONS("villager_professions", "Villager Professions"),

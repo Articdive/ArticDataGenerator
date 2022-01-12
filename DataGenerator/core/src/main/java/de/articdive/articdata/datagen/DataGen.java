@@ -58,6 +58,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.MOB_EFFECTS, "MobEffectGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.PARTICLES, "ParticleGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.POTIONS, "PotionGenerator_1_16_5");
+                DataGenHolder.addGenerator(DataGenType.RECIPES, "RecipeGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.SOUNDS, "SoundGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.SOUND_SOURCES, "SoundSourceGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.VILLAGER_PROFESSIONS, "VillagerProfessionGenerator_1_16_5");
@@ -103,6 +104,7 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.MOB_EFFECTS, "MobEffectGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.PARTICLES, "ParticleGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.POTIONS, "PotionGenerator_1_16_5");
+                DataGenHolder.addGenerator(DataGenType.RECIPES, "RecipeGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.SOUNDS, "SoundGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.SOUND_SOURCES, "SoundSourceGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.VILLAGER_PROFESSIONS, "VillagerProfessionGenerator_1_16_5");
@@ -144,9 +146,10 @@ public class DataGen {
                 DataGenHolder.addGenerator(DataGenType.FLUID_PROPERTIES, "FluidPropertyGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.MATERIALS, "MaterialGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.MAP_COLORS, "MapColorGenerator_1_16_5");
-                DataGenHolder.addGenerator(DataGenType.PARTICLES, "ParticleGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.MOB_EFFECTS, "MobEffectGenerator_1_16_5");
+                DataGenHolder.addGenerator(DataGenType.PARTICLES, "ParticleGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.POTIONS, "PotionGenerator_1_16_5");
+                DataGenHolder.addGenerator(DataGenType.RECIPES, "RecipeGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.SOUND_SOURCES, "SoundSourceGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.SOUNDS, "SoundGenerator_1_16_5");
                 DataGenHolder.addGenerator(DataGenType.VILLAGER_PROFESSIONS, "VillagerProfessionGenerator_1_16_5");
