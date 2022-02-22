@@ -27,13 +27,6 @@ Adding to a Maven Project:
 
 ```xml
 
-<repositories>
-    <repository>
-        <id>krypton-repo</id>
-        <url>https://repo.kryptonmc.org/releases</url>
-    </repository>
-</repositories>
-
 <dependencies>
     <dependency>
         <groupId>de.articdive</groupId>
@@ -47,7 +40,7 @@ Adding to a Gradle Project (Kotlin DSL)
 
 ```kotlin
 repositories {
-    maven("https://repo.kryptonmc.org/releases")
+    mavenCentral()
 }
 dependencies {
     implementation("de.articdive:articdata:-${COMMIT::8}")
