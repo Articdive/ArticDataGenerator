@@ -1,5 +1,6 @@
 plugins {
     id("maven-publish")
+    signing
 }
 
 tasks {
