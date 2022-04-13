@@ -2,7 +2,7 @@ package de.articdive.articdata.generators;
 
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.common.DataGenerator_1_18;
+import de.articdive.articdata.generators.common.DataGenerator_1_17;
 import java.util.Set;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
@@ -25,8 +25,8 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Respawn Anchor Works", supported = true)
 @GeneratorEntry(name = "MinY", supported = true)
 @GeneratorEntry(name = "Height (maxY)", supported = true)
-public final class DimensionTypeGenerator_1_18 extends DataGenerator_1_18<DimensionType> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DimensionTypeGenerator_1_18.class);
+public final class DimensionTypeGenerator_1_18_2 extends DataGenerator_1_17<DimensionType> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DimensionTypeGenerator_1_18_2.class);
 
     @Override
     public void generateNames() {
@@ -35,7 +35,7 @@ public final class DimensionTypeGenerator_1_18 extends DataGenerator_1_18<Dimens
 
     @Override
     public JsonObject generate() {
-        Registry<DimensionType> dimensionTypeRegistry = RegistryAccess.RegistryHolder.builtin().ownedRegistry(Registry.DIMENSION_TYPE_REGISTRY).orElse(null);
+        Registry<DimensionType> dimensionTypeRegistry = RegistryAccess.BUILTIN.get().ownedRegistry(Registry.DIMENSION_TYPE_REGISTRY).orElse(null);
         if (dimensionTypeRegistry == null) {
             LOGGER.error("Failed to hook into dimension type registry. Dimension types will be skipped!");
             return new JsonObject();
