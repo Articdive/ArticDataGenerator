@@ -22,6 +22,6 @@ dependencies {
 
 minecraft {
     // Will be mostly ignored but it has to be defined (VanillaGradle wants it for whatever reason)
-    version("1.16.5")
+    version("1.16.3")
     platform(org.spongepowered.gradle.vanilla.repository.MinecraftPlatform.SERVER)
 }

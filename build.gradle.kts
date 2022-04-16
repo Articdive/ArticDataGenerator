@@ -76,31 +76,28 @@ tasks {
 fun getVersionsRequiredForCompile(version: String): ArrayList<String> {
     // IMPORTANT: THE FIRST RETURNED VERSION IS THE GENERATOR VERSION (IMPLEMENTED VERSION)
     when (version) {
-        "1.16",
-        "1.16.1",
-        "1.16.2",
         "1.16.3",
         "1.16.4",
         "1.16.5" -> {
-            return arrayListOf("1.16.5")
+            return arrayListOf("1.16.3")
         }
-        // 1.17 (uses some 1.16.5 generators)
+        // 1.17 (uses some 1.16.3 generators)
         "1.17",
         "1.17.1" -> {
-            return arrayListOf("1.17", "1.16.5")
+            return arrayListOf("1.17", "1.16.3")
         }
-        // 1.18 (uses some 1.16.5, 1.17 generators
+        // 1.18 (uses some 1.16.3, 1.17 generators
         "1.18",
         "1.18.1"-> {
-            return arrayListOf("1.18", "1.17", "1.16.5")
+            return arrayListOf("1.18", "1.17", "1.16.3")
         }
         // 1.18.2 is special because of changes to Biome categories :(.
         "1.18.2" -> {
-            return arrayListOf("1.18.2", "1.18", "1.17", "1.16.5")
+            return arrayListOf("1.18.2", "1.18", "1.17", "1.16.3")
         }
-        // Attempt with 1.16.5
+        // Attempt with 1.16.3
         else -> {
-            return arrayListOf("1.16.5")
+            return arrayListOf("1.16.3")
         }
     }
 }

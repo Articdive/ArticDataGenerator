@@ -17,15 +17,28 @@ public final class DataGenHolder {
 
     }
 
-    public static void addGenerator(DataGenType type, String dataGeneratorRef) {
-        String dataGeneratorReference = "de.articdive.articdata.generators." + dataGeneratorRef;
-        try {
-            Class<?> dataGeneratorClazz = Class.forName(dataGeneratorReference);
-            DataGenerator<?> dg = (DataGenerator<?>) dataGeneratorClazz.getConstructor().newInstance();
-            generators.put(type, dg);
-        } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+    public static void addGenerator(DataGenType type, MinecraftVersion[] lowerVersions) {
+        for (int i = lowerVersions.length - 1; i >= 0; i--) {
+            MinecraftVersion version = lowerVersions[i];
+            // e.g. de.articdive.articdata.generators.1_16_5.AttributeGenerator
+            String dataGeneratorReference = "de.articdive.articdata.generators." + version.getPackageName() + "." + type.getClassName();
+            Class<?> dataGeneratorClazz;
+            try {
+                dataGeneratorClazz = Class.forName(dataGeneratorReference);
+            } catch (ClassNotFoundException e) {
+                // Expected behaviour
+                continue;
+            }
+            try {
+                DataGenerator<?> dg = (DataGenerator<?>) dataGeneratorClazz.getConstructor().newInstance();
+                generators.put(type, dg);
+                return;
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                     IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
+        throw new IllegalStateException("Could not find generator for type: " + type.name());
     }
 
     public static void runGenerators(FileOutputHandler fileOutputHandler) {

@@ -6,7 +6,7 @@ include("DataGenerator:VersionHolder")
 
 include("DataGenerator:core")
 
-include("DataGenerator:1.16.5")
+include("DataGenerator:1.16.3")
 
 include("DataGenerator:1.17")
 

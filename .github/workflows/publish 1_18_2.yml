@@ -20,7 +20,7 @@ jobs:
     - name: Inject Commit Revision
       run: "echo \"-${GITHUB_SHA::8}\" >> git_reference_id.txt"
 
-    - name: Generate 1.182 data
+    - name: Generate 1.18.2 data
       run: gradle clean cleanAllMinecraft generateData_1.18.2
 
     - name: Push 1.18.2 Data

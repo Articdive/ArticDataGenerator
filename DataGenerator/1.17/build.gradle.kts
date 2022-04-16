@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":DataGenerator:1.16.5"))
+    implementation(project(":DataGenerator:1.16.3"))
     implementation(project(":DataGenerator:core"))
 }
 

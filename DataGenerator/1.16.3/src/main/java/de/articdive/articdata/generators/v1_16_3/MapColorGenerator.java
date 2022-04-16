@@ -1,0 +1,53 @@
+package de.articdive.articdata.generators.v1_16_3;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.annotations.GeneratorEntry;
+import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import net.minecraft.world.level.material.MaterialColor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@GeneratorEntry(name = "Protocol ID", supported = true)
+@GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Color (Decimal)", supported = true)
+public final class MapColorGenerator extends DataGenerator<MaterialColor> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MapColorGenerator.class);
+
+    @Override
+    public void generateNames() {
+        for (Field declaredField : MaterialColor.class.getDeclaredFields()) {
+            if (declaredField.getName().equals("MATERIAL_COLORS") || declaredField.getType() != MaterialColor.class) {
+                continue;
+            }
+            try {
+                MaterialColor mc = (MaterialColor) declaredField.get(null);
+                names.put(mc, declaredField.getName());
+            } catch (IllegalAccessException e) {
+                // Just stop I guess
+                LOGGER.error("Failed to access map color naming system", e);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public JsonArray generate() {
+        JsonArray mapColors = new JsonArray();
+
+        for (MaterialColor mc : MaterialColor.MATERIAL_COLORS) {
+            if (mc == null) {
+                continue;
+            }
+            JsonObject mapColor = new JsonObject();
+
+            mapColor.addProperty("id", mc.id);
+            mapColor.addProperty("mojangName", names.get(mc));
+            mapColor.addProperty("color", mc.col);
+
+            mapColors.add(mapColor);
+        }
+        return mapColors;
+    }
+}
