@@ -7,8 +7,9 @@ import de.articdive.articdata.datagen.DataGenType;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.material.Fluids;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
 @GeneratorEntry(name = "Corresponding Bucket Item", supported = true)
@@ -47,7 +49,7 @@ public final class FluidGenerator extends DataGenerator<Fluid> {
     public JsonObject generate() {
         final Map<Property<?>, String> fsPropertyNames = (Map<Property<?>, String>) DataGenHolder.getNameMap(DataGenType.FLUID_PROPERTIES);
 
-        Set<ResourceLocation> fluidRLs = Registry.FLUID.keySet();
+        List<ResourceLocation> fluidRLs = Registry.FLUID.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.FLUID.getId(Registry.FLUID.get(value)))).toList();
         JsonObject fluids = new JsonObject();
 
         for (ResourceLocation fluidRL : fluidRLs) {

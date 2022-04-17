@@ -6,6 +6,7 @@ import de.articdive.articdata.datagen.DataGenType;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_18.common.DataGenerator;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.core.Holder;
@@ -65,7 +66,7 @@ public final class BiomeGenerator extends DataGenerator<Biome> {
         Map<SoundEvent, String> soundNames = (Map<SoundEvent, String>) DataGenHolder.getNameMap(DataGenType.SOUNDS);
         Map<ParticleType<?>, String> particleNames = (Map<ParticleType<?>, String>) DataGenHolder.getNameMap(DataGenType.PARTICLES);
 
-        Set<ResourceLocation> biomeRLs = BuiltinRegistries.BIOME.keySet();
+        List<ResourceLocation> biomeRLs = BuiltinRegistries.BIOME.keySet().stream().sorted().toList();
         JsonObject biomes = new JsonObject();
 
         for (ResourceLocation biomeRL : biomeRLs) {

@@ -11,7 +11,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +24,7 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Result", supported = true)
 public class RecipeGenerator extends DataGenerator<Void> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RecipeGenerator.class);
+
     @Override
     public void generateNames() {
 
@@ -31,38 +34,31 @@ public class RecipeGenerator extends DataGenerator<Void> {
     public JsonElement generate() {
         File recipesFolder = new File(dataFolder, "recipes");
 
-        File[] listedFiles = recipesFolder.listFiles();
-        if (listedFiles != null) {
-            List<File> children = new ArrayList<>(Arrays.asList(listedFiles));
-            JsonObject recipes = new JsonObject();
-            for (int i = 0; i < children.size(); i++) {
-                File file = children.get(i);
-                // Add subdirectories files to the for-loop.
-                if (file.isDirectory()) {
-                    File[] subChildren = file.listFiles();
-                    if (subChildren != null) {
-                        children.addAll(Arrays.asList(subChildren));
-                    }
-                    continue;
+        List<File> children = new ArrayList<>(Arrays.stream(Objects.requireNonNull(recipesFolder.listFiles())).sorted(Comparator.comparing(File::getName)).toList());
+        JsonObject recipes = new JsonObject();
+        for (File child : children) {
+            // Add subdirectories files to the for-loop.
+            if (child.isDirectory()) {
+                File[] subChildren = child.listFiles();
+                if (subChildren != null) {
+                    children.addAll(Arrays.asList(subChildren));
                 }
-                JsonObject recipe;
-                try {
-                    recipe = FileOutputHandler.GSON.fromJson(new JsonReader(new FileReader(file)), JsonObject.class);
-                } catch (FileNotFoundException e) {
-                    LOGGER.error("Failed to read recipe located at '" + file + "'.", e);
-                    continue;
-                }
-                String fileName = file.getAbsolutePath().substring(recipesFolder.getAbsolutePath().length() + 1);
-                // Make sure we use the correct slashes.
-                fileName = fileName.replace("\\", "/");
-                // Remove .json by removing last 5 chars of the name.
-                String tableName = fileName.substring(0, fileName.length() - 5);
-                recipes.add("minecraft:" + tableName, recipe);
+                continue;
             }
-            return recipes;
-        } else {
-            LOGGER.error("Failed to find recipes in data folder.");
-            return new JsonObject();
+            JsonObject recipe;
+            try {
+                recipe = FileOutputHandler.GSON.fromJson(new JsonReader(new FileReader(child)), JsonObject.class);
+            } catch (FileNotFoundException e) {
+                LOGGER.error("Failed to read recipe located at '" + child + "'.", e);
+                continue;
+            }
+            String fileName = child.getAbsolutePath().substring(recipesFolder.getAbsolutePath().length() + 1);
+            // Make sure we use the correct slashes.
+            fileName = fileName.replace("\\", "/");
+            // Remove .json by removing last 5 chars of the name.
+            String tableName = fileName.substring(0, fileName.length() - 5);
+            recipes.add("minecraft:" + tableName, recipe);
         }
+        return recipes;
     }
 }

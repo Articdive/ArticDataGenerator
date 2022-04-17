@@ -3,15 +3,15 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.util.Set;
 
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
@@ -38,7 +38,7 @@ public final class VillagerProfessionGenerator extends DataGenerator<VillagerPro
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> villagerProfessionRLs = Registry.VILLAGER_PROFESSION.keySet();
+        List<ResourceLocation> villagerProfessionRLs = Registry.VILLAGER_PROFESSION.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.VILLAGER_PROFESSION.getId(Registry.VILLAGER_PROFESSION.get(value)))).toList();;
         JsonObject villagerProfessions = new JsonObject();
 
         for (ResourceLocation villagerProfessionRL : villagerProfessionRLs) {

@@ -7,8 +7,9 @@ import de.articdive.articdata.datagen.DataGenType;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_18.common.DataGenerator;
 import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -88,7 +89,9 @@ public final class BlockGenerator extends DataGenerator<Block> {
         Map<SoundEvent, String> soundNames = (Map<SoundEvent, String>) DataGenHolder.getNameMap(DataGenType.SOUNDS);
         Map<Property<?>, String> bsPropertyNames = (Map<Property<?>, String>) DataGenHolder.getNameMap(DataGenType.BLOCK_PROPERTIES);
 
-        Set<ResourceLocation> blockRLs = Registry.BLOCK.keySet();
+        // Sort by ID
+        List<ResourceLocation> blockRLs = Registry.BLOCK.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.BLOCK.getId(Registry.BLOCK.get(value)))).toList();
+
         JsonObject blocks = new JsonObject();
         for (ResourceLocation blockRL : blockRLs) {
             Block b = Registry.BLOCK.get(blockRL);

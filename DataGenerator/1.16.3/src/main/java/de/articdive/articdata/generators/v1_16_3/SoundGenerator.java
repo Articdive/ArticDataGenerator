@@ -3,15 +3,15 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.util.Set;
 
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
@@ -38,7 +38,7 @@ public final class SoundGenerator extends DataGenerator<SoundEvent> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> soundRLs = Registry.SOUND_EVENT.keySet();
+        List<ResourceLocation> soundRLs = Registry.SOUND_EVENT.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.SOUND_EVENT.getId(Registry.SOUND_EVENT.get(value)))).toList();;
         JsonObject sounds = new JsonObject();
 
         for (ResourceLocation soundRL : soundRLs) {

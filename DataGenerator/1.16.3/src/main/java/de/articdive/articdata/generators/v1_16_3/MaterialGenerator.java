@@ -7,7 +7,8 @@ import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
-import java.util.Set;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -64,7 +65,7 @@ public final class MaterialGenerator extends DataGenerator<Item> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> itemRLs = Registry.ITEM.keySet();
+        List<ResourceLocation> itemRLs = Registry.ITEM.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.ITEM.getId(Registry.ITEM.get(value)))).toList();;
         JsonObject items = new JsonObject();
 
         for (ResourceLocation itemRL : itemRLs) {

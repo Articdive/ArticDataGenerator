@@ -5,13 +5,12 @@ import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.datagen.annotations.NoGeneratorEntries;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public final class DataGenHolder {
-    private static final Map<DataGenType, DataGenerator<?>> generators = new HashMap<>();
+    private static final Map<DataGenType, DataGenerator<?>> generators = new LinkedHashMap<>();
 
     private DataGenHolder() {
 
@@ -58,7 +57,7 @@ public final class DataGenHolder {
         StringBuilder fullDoc = new StringBuilder();
         // Run documentation generators (in alphabetical order)
         for (Map.Entry<DataGenType, DataGenerator<?>> entry :
-                generators.entrySet().stream().sorted(Comparator.comparing(o -> o.getKey().name())).collect(Collectors.toList())
+                generators.entrySet().stream().sorted(Comparator.comparing(o -> o.getKey().name())).toList()
         ) {
             DataGenType type = entry.getKey();
             DataGenerator<?> generator = entry.getValue();
@@ -98,6 +97,4 @@ public final class DataGenHolder {
     public static Map<?, String> getNameMap(DataGenType type) {
         return generators.get(type).names;
     }
-
-
 }

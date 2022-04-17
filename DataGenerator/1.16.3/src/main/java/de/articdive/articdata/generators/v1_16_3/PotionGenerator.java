@@ -3,6 +3,9 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.alchemy.Potion;
@@ -10,9 +13,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-import java.util.Set;
-
+@GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
 public final class PotionGenerator extends DataGenerator<Potion> {
@@ -36,7 +37,7 @@ public final class PotionGenerator extends DataGenerator<Potion> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> effectRLs = Registry.POTION.keySet();
+        List<ResourceLocation> effectRLs = Registry.POTION.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.POTION.getId(Registry.POTION.get(value)))).toList();;
         JsonObject potions = new JsonObject();
 
         for (ResourceLocation effectRL : effectRLs) {
@@ -44,6 +45,7 @@ public final class PotionGenerator extends DataGenerator<Potion> {
 
             JsonObject effect = new JsonObject();
             // Null safety check.
+            effect.addProperty("id", Registry.POTION.getId(p));
             effect.addProperty("mojangName", names.get(p));
 
             potions.add(effectRL.toString(), effect);

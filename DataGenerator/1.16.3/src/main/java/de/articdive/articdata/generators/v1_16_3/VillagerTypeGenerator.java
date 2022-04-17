@@ -4,7 +4,8 @@ import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
-import java.util.Set;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.npc.VillagerType;
@@ -35,7 +36,7 @@ public final class VillagerTypeGenerator extends DataGenerator<VillagerType> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> villagerTypeRLs = Registry.VILLAGER_TYPE.keySet();
+        List<ResourceLocation> villagerTypeRLs = Registry.VILLAGER_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.VILLAGER_TYPE.getId(Registry.VILLAGER_TYPE.get(value)))).toList();;
         JsonObject villagerTypes = new JsonObject();
 
         for (ResourceLocation villagerTypeRL : villagerTypeRLs) {

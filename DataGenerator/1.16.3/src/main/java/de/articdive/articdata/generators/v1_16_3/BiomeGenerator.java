@@ -3,6 +3,9 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Optional;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -12,11 +15,6 @@ import net.minecraft.world.level.biome.Biomes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Field;
-import java.util.Optional;
-import java.util.Set;
-
-@GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
 @GeneratorEntry(name = "Humidity", supported = true)
@@ -57,7 +55,7 @@ public final class BiomeGenerator extends DataGenerator<ResourceKey<Biome>> {
     @SuppressWarnings("unchecked")
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> biomeRLs = BuiltinRegistries.BIOME.keySet();
+        List<ResourceLocation> biomeRLs = BuiltinRegistries.BIOME.keySet().stream().sorted().toList();
         JsonObject biomes = new JsonObject();
 
         for (ResourceLocation biomeRL : biomeRLs) {

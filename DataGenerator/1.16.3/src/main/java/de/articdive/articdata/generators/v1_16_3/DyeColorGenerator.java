@@ -7,6 +7,8 @@ import de.articdive.articdata.datagen.DataGenType;
 import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Map;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.material.MaterialColor;
@@ -37,8 +39,7 @@ public final class DyeColorGenerator extends DataGenerator<DyeColor> {
         Map<MaterialColor, String> bsPropertyNames = (Map<MaterialColor, String>) DataGenHolder.getNameMap(DataGenType.MAP_COLORS);
 
         JsonArray dyeColors = new JsonArray();
-
-        for (DyeColor dc : DyeColor.values()) {
+        for (DyeColor dc : Arrays.stream(DyeColor.values()).sorted(Comparator.comparingInt(DyeColor::getId)).toList()) {
             JsonObject dyeColor = new JsonObject();
 
             dyeColor.addProperty("id", dc.getId());

@@ -3,7 +3,7 @@ package de.articdive.articdata.generators.v1_18_2;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_17.common.DataGenerator;
-import java.util.Set;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +40,7 @@ public final class DimensionTypeGenerator extends DataGenerator<DimensionType> {
             LOGGER.error("Failed to hook into dimension type registry. Dimension types will be skipped!");
             return new JsonObject();
         }
-        Set<ResourceLocation> dimensionTypeRLs = dimensionTypeRegistry.keySet();
+        List<ResourceLocation> dimensionTypeRLs = dimensionTypeRegistry.keySet().stream().sorted().toList();
         JsonObject dimensionTypes = new JsonObject();
 
         for (ResourceLocation dimensionTypeRL : dimensionTypeRLs) {

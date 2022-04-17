@@ -4,6 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.util.Arrays;
+import java.util.Comparator;
 import net.minecraft.sounds.SoundSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +29,7 @@ public final class SoundSourceGenerator extends DataGenerator<SoundSource> {
     public JsonArray generate() {
         JsonArray sounds = new JsonArray();
 
-        for (SoundSource ss : SoundSource.values()) {
+        for (SoundSource ss : Arrays.stream(SoundSource.values()).sorted(Comparator.comparingInt(Enum::ordinal)).toList()) {
             JsonObject soundSource = new JsonObject();
             soundSource.addProperty("id", ss.ordinal());
             soundSource.addProperty("mojangName", ss.name());

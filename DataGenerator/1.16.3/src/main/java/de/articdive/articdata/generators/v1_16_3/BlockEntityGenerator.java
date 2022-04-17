@@ -4,15 +4,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Set;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.util.Set;
 
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
@@ -39,7 +39,7 @@ public final class BlockEntityGenerator extends DataGenerator<BlockEntityType> {
     @Override
     @SuppressWarnings("unchecked")
     public JsonObject generate() {
-        Set<ResourceLocation> blockEntityRLs = Registry.BLOCK_ENTITY_TYPE.keySet();
+        List<ResourceLocation> blockEntityRLs = Registry.BLOCK_ENTITY_TYPE.keySet().stream().sorted().toList();
         JsonObject blockEntities = new JsonObject();
 
         for (ResourceLocation blockEntityRL : blockEntityRLs) {

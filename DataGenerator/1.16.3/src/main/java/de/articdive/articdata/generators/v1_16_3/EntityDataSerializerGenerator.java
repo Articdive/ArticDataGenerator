@@ -4,12 +4,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
 
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
@@ -34,23 +36,28 @@ public final class EntityDataSerializerGenerator extends DataGenerator<EntityDat
 
     @Override
     public JsonArray generate() {
-        JsonArray entityDataSerializers = new JsonArray();
+        List<EntityDataSerializer<?>> serializers = new ArrayList<>();
         for (Field declaredField : EntityDataSerializers.class.getDeclaredFields()) {
             if (!EntityDataSerializer.class.isAssignableFrom(declaredField.getType())) {
                 continue;
             }
-            JsonObject entityDataSerializer = new JsonObject();
             try {
-                EntityDataSerializer<?> eds = (EntityDataSerializer<?>) declaredField.get(null);
-
-                String fieldName = declaredField.getName();
-                entityDataSerializer.addProperty("id", EntityDataSerializers.getSerializedId(eds));
-                entityDataSerializer.addProperty("type", fieldName);
-
-                entityDataSerializers.add(entityDataSerializer);
+                serializers.add((EntityDataSerializer<?>) declaredField.get(null));
             } catch (IllegalAccessException e) {
                 LOGGER.error("Failed to get entity data serializer from the entity data serializer mapping system.", e);
             }
+        }
+
+        serializers.sort(Comparator.comparingInt(EntityDataSerializers::getSerializedId));
+
+        JsonArray entityDataSerializers = new JsonArray();
+        for (EntityDataSerializer<?> serializer : serializers) {
+            JsonObject entityDataSerializer = new JsonObject();
+
+            entityDataSerializer.addProperty("id", EntityDataSerializers.getSerializedId(serializer));
+            entityDataSerializer.addProperty("type", names.get(serializer));
+
+            entityDataSerializers.add(entityDataSerializer);
         }
         return entityDataSerializers;
     }

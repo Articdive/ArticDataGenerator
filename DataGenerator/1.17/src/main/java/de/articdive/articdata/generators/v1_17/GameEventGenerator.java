@@ -3,14 +3,14 @@ package de.articdive.articdata.generators.v1_17;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_17.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.util.Set;
 
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
@@ -37,7 +37,7 @@ public final class GameEventGenerator extends DataGenerator<GameEvent> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> gameEventRLs = Registry.GAME_EVENT.keySet();
+        List<ResourceLocation> gameEventRLs = Registry.GAME_EVENT.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.GAME_EVENT.getId(Registry.GAME_EVENT.get(value)))).toList();
         JsonObject gameEvents = new JsonObject();
 
         for (ResourceLocation gameEventRL : gameEventRLs) {

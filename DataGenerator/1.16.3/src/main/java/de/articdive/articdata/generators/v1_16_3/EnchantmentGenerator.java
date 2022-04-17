@@ -4,16 +4,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
@@ -48,7 +48,7 @@ public final class EnchantmentGenerator extends DataGenerator<Enchantment> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> enchantmentRLs = Registry.ENCHANTMENT.keySet();
+        List<ResourceLocation> enchantmentRLs = Registry.ENCHANTMENT.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.ENCHANTMENT.getId(Registry.ENCHANTMENT.get(value)))).toList();
         JsonObject enchantments = new JsonObject();
 
         for (ResourceLocation enchantmentRL : enchantmentRLs) {

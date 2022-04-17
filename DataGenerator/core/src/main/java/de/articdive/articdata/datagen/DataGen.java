@@ -27,9 +27,7 @@ public class DataGen {
         }
         MinecraftVersion minecraftVersion = MinecraftVersion.valueOf("V" + version);
         switch (minecraftVersion) {
-            case V1_18_2:
-            case V1_18_1:
-            case V1_18: {
+            case V1_18_2, V1_18_1, V1_18 -> {
                 // Run 1.18
                 try {
                     Class<?> dgCommon1_18 = Class.forName("de.articdive.articdata.generators.v1_18.common.DataGenerator");
@@ -42,10 +40,8 @@ public class DataGen {
                 for (DataGenType supportedDataGenerator : minecraftVersion.getSupportedDataGenerators()) {
                     DataGenHolder.addGenerator(supportedDataGenerator, minecraftVersion.lessAndEqualVersions());
                 }
-
             }
-            case V1_17_1:
-            case V1_17: {
+            case V1_17_1, V1_17 -> {
                 // Run 1.17
                 try {
                     Class<?> dgCommon1_17 = Class.forName("de.articdive.articdata.generators.v1_17.common.DataGenerator");
@@ -59,9 +55,7 @@ public class DataGen {
                     DataGenHolder.addGenerator(supportedDataGenerator, minecraftVersion.lessAndEqualVersions());
                 }
             }
-            case V1_16_5:
-            case V1_16_4:
-            case V1_16_3: {
+            case V1_16_5, V1_16_4, V1_16_3 -> {
                 // Run 1.16_3
                 try {
                     Class<?> dgCommon1_16_3 = Class.forName("de.articdive.articdata.generators.v1_16_3.common.DataGenerator");

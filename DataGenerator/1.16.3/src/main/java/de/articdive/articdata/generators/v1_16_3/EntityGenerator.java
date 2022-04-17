@@ -6,6 +6,12 @@ import de.articdive.articdata.datagen.DataGenHolder;
 import de.articdive.articdata.datagen.DataGenType;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import net.minecraft.core.Registry;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializer;
@@ -17,12 +23,6 @@ import net.minecraft.world.entity.decoration.Painting;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.ParameterizedType;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
@@ -37,7 +37,7 @@ import java.util.Set;
 @GeneratorEntry(name = "Client Tracking Range", supported = true)
 public final class EntityGenerator extends DataGenerator<EntityType<?>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(EntityGenerator.class);
-    private static final Map<EntityType<?>, Class<?>> entityClasses = new HashMap<>();
+    private static final Map<EntityType<?>, Class<?>> entityClasses = new LinkedHashMap<>();
 
     @Override
     public void generateNames() {
@@ -62,7 +62,7 @@ public final class EntityGenerator extends DataGenerator<EntityType<?>> {
     public JsonObject generate() {
         Map<EntityDataSerializer<?>, String> edsNames = (Map<EntityDataSerializer<?>, String>) DataGenHolder.getNameMap(DataGenType.ENTITY_DATA_SERIALIZERS);
 
-        Set<ResourceLocation> entityRLs = Registry.ENTITY_TYPE.keySet();
+        List<ResourceLocation> entityRLs = Registry.ENTITY_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.ENTITY_TYPE.getId(Registry.ENTITY_TYPE.get(value)))).toList();;
         JsonObject entities = new JsonObject();
 
         for (ResourceLocation entityRL : entityRLs) {

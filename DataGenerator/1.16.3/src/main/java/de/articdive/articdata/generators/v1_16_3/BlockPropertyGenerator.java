@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Comparator;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -38,7 +40,7 @@ public final class BlockPropertyGenerator extends DataGenerator<Property<?>> {
     @Override
     public JsonObject generate() {
         JsonObject blockProperties = new JsonObject();
-        for (Field declaredField : BlockStateProperties.class.getDeclaredFields()) {
+        for (Field declaredField : Arrays.stream(BlockStateProperties.class.getDeclaredFields()).sorted(Comparator.comparing(Field::getName)).toList()) {
             if (!Property.class.isAssignableFrom(declaredField.getType())) {
                 continue;
             }

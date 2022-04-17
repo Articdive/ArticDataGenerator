@@ -5,6 +5,9 @@ import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_18.common.DataGenerator;
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Objects;
 import net.minecraft.world.level.material.MaterialColor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +47,7 @@ public final class MapColorGenerator extends DataGenerator<MaterialColor> {
             return mapColors;
         }
 
-        for (MaterialColor mc : colors) {
+        for (MaterialColor mc : Arrays.stream(colors).filter(Objects::nonNull).sorted(Comparator.comparingInt(value -> value.id)).toList()) {
             if (mc == null) {
                 continue;
             }

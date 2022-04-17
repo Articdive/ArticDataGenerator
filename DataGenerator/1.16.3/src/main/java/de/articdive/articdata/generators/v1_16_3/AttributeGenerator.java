@@ -3,6 +3,8 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.lang.reflect.Field;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -10,9 +12,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Field;
-import java.util.Set;
 
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
@@ -41,7 +40,7 @@ public final class AttributeGenerator extends DataGenerator<Attribute> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> attributeRLs = Registry.ATTRIBUTE.keySet();
+        List<ResourceLocation> attributeRLs = Registry.ATTRIBUTE.keySet().stream().sorted().toList();
         JsonObject attributes = new JsonObject();
 
         for (ResourceLocation attributeRL : attributeRLs) {

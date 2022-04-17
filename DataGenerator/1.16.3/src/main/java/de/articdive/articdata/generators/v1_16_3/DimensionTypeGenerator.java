@@ -3,13 +3,12 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import java.util.List;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.dimension.DimensionType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
 
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Bed Works", supported = true)
@@ -33,7 +32,7 @@ public final class DimensionTypeGenerator extends DataGenerator<DimensionType> {
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> dimensionTypeRLs = RegistryAccess.RegistryHolder.builtin().dimensionTypes().keySet();
+        List<ResourceLocation> dimensionTypeRLs = RegistryAccess.RegistryHolder.builtin().dimensionTypes().keySet().stream().sorted().toList();
         JsonObject dimensionTypes = new JsonObject();
 
         for (ResourceLocation dimensionTypeRL : dimensionTypeRLs) {

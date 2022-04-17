@@ -4,7 +4,8 @@ import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
-import java.util.Set;
+import java.util.Comparator;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
@@ -35,7 +36,7 @@ public final class CustomStatisticGenerator extends DataGenerator<ResourceLocati
 
     @Override
     public JsonObject generate() {
-        Set<ResourceLocation> customStatisticsRLs = Registry.CUSTOM_STAT.keySet();
+        List<ResourceLocation> customStatisticsRLs = Registry.CUSTOM_STAT.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.CUSTOM_STAT.getId(Registry.CUSTOM_STAT.get(value)))).toList();
         JsonObject customStatistics = new JsonObject();
 
         for (ResourceLocation customStatisticRL : customStatisticsRLs) {
