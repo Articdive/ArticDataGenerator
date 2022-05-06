@@ -12,6 +12,7 @@ import java.nio.file.Files;
 public abstract class DataGenerator<T> extends de.articdive.articdata.datagen.DataGenerator<T> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataGenerator.class);
     protected static File dataFolder;
+    protected static File reportsFolder;
 
     public static void prepare() {
         Bootstrap.bootStrap();
@@ -32,5 +33,6 @@ public abstract class DataGenerator<T> extends de.articdive.articdata.datagen.Da
         }
         // Points to data/minecraft
         dataFolder = new File(tempDirFile, "data" + File.separator + "minecraft");
+        reportsFolder = new File(tempDirFile, "reports");
     }
 }

@@ -9,6 +9,7 @@ public enum MinecraftVersion {
             DataGenType.BLOCKS,
             DataGenType.BLOCK_ENTITIES,
             DataGenType.BLOCK_PROPERTIES,
+            DataGenType.COMMANDS,
             DataGenType.CUSTOM_STATISTICS,
             DataGenType.DIMENSION_TYPES,
             DataGenType.DYE_COLORS,

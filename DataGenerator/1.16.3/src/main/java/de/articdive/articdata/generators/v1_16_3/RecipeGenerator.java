@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Layout", supported = true)
 @GeneratorEntry(name = "Recipe", supported = true)
 @GeneratorEntry(name = "Result", supported = true)
-public class RecipeGenerator extends DataGenerator<Void> {
+public final class RecipeGenerator extends DataGenerator<Void> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RecipeGenerator.class);
 
     @Override

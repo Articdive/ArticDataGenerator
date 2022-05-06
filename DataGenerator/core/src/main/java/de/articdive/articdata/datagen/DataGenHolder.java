@@ -4,10 +4,13 @@ import com.google.gson.JsonElement;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.datagen.annotations.NoGeneratorEntries;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import net.steppschuh.markdowngenerator.table.Table;
+import net.steppschuh.markdowngenerator.text.heading.Heading;
 
 public final class DataGenHolder {
     private static final Map<DataGenType, DataGenerator<?>> generators = new LinkedHashMap<>();
@@ -54,7 +57,7 @@ public final class DataGenHolder {
             fileOutputHandler.outputJson(data, type.getFileName());
         }
         StringBuilder TOC = new StringBuilder();
-        StringBuilder fullDoc = new StringBuilder();
+        StringBuilder fullDocumentationSection = new StringBuilder();
         // Run documentation generators (in alphabetical order)
         for (Map.Entry<DataGenType, DataGenerator<?>> entry :
                 generators.entrySet().stream().sorted(Comparator.comparing(o -> o.getKey().name())).toList()
@@ -73,25 +76,34 @@ public final class DataGenHolder {
 
             GeneratorEntry[] entries = generator.getClass().getDeclaredAnnotationsByType(GeneratorEntry.class);
             // Output the documentation
-            StringBuilder genDoc = new StringBuilder();
-            genDoc.append("### ").append(header).append("\n");
-            genDoc.append("\n");
-            // Within one line
-            genDoc.append("| Data Type                               | Supported?         |\n");
-            genDoc.append("| :-------------------------------------: | :----------------: |\n");
+            StringBuilder typeDocumentationSegment = new StringBuilder();
+            typeDocumentationSegment.append(new Heading(header, 3)).append("\n\n");
+
+            boolean usesDescription = Arrays.stream(entries).anyMatch(generatorEntry -> !generatorEntry.description().isEmpty());
+
+            Table.Builder tableBuilder = new Table.Builder().withAlignments(Table.ALIGN_CENTER, Table.ALIGN_CENTER, Table.ALIGN_CENTER);
+            if (usesDescription) {
+                tableBuilder.addRow("Data Type", "Supported?", "Description");
+            } else {
+                tableBuilder.addRow("Data Type", "Supported?");
+            }
             // GeneratorEntries inserted here
             for (GeneratorEntry generatorEntry : entries) {
                 String name = generatorEntry.name();
                 boolean supported = generatorEntry.supported();
-                genDoc.append("| ").append(name).append(" ".repeat(40 - name.length())).append("| ")
-                        .append(supported ? ":heavy_check_mark: " : ":x:                ").append("|\n");
+                String desc = generatorEntry.description();
+                if (usesDescription) {
+                    tableBuilder.addRow(name, supported ? ":heavy_check_mark: " : ":x:", desc);
+                } else {
+                    tableBuilder.addRow(name, supported ? ":heavy_check_mark: " : ":x:");
+                }
             }
-            genDoc.append("\n");
-            fullDoc.append(genDoc);
+            typeDocumentationSegment.append(tableBuilder.build()).append("\n\n");
+            fullDocumentationSection.append(typeDocumentationSegment);
 
         }
         fileOutputHandler.outputTOC(TOC.deleteCharAt(TOC.lastIndexOf("\n")).toString());
-        fileOutputHandler.outputDocumentation(fullDoc.toString());
+        fileOutputHandler.outputDocumentation(fullDocumentationSection.toString());
     }
 
     public static Map<?, String> getNameMap(DataGenType type) {

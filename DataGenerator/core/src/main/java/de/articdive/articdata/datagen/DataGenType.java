@@ -6,6 +6,7 @@ public enum DataGenType {
     BLOCKS("blocks", "Blocks", "BlockGenerator"),
     BLOCK_ENTITIES("block_entities", "Block Entities", "BlockEntityGenerator"),
     BLOCK_PROPERTIES("block_properties", "Block Properties", "BlockPropertyGenerator"),
+    COMMANDS("commands", "Commands", "CommandGenerator"),
     CUSTOM_STATISTICS("custom_statistics", "Custom Statistics", "CustomStatisticGenerator"),
     DIMENSION_TYPES("dimension_types", "Dimension Types", "DimensionTypeGenerator"),
     DYE_COLORS("dye_colors", "Dye Colors", "DyeColorGenerator"),

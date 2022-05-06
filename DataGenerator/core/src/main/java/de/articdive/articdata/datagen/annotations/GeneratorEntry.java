@@ -7,8 +7,10 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(GenerationInfos.class)
 public @interface GeneratorEntry {
-
     String name();
+
+    String description() default "";
+
     boolean supported();
 }
 
