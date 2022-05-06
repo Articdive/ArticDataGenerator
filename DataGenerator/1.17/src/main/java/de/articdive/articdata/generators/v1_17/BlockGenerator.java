@@ -1,11 +1,11 @@
-package de.articdive.articdata.generators.v1_18;
+package de.articdive.articdata.generators.v1_17;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.DataGenHolder;
 import de.articdive.articdata.datagen.DataGenType;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_18.common.DataGenerator;
+import de.articdive.articdata.generators.v1_17.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
@@ -64,6 +64,7 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Render Shape", supported = true)
 @GeneratorEntry(name = "Offset", supported = true)
 @GeneratorEntry(name = "Sound Information", supported = true)
+@GeneratorEntry(name = "Pick Block Information", supported = true)
 public final class BlockGenerator extends DataGenerator<Block> {
     private static final Logger LOGGER = LoggerFactory.getLogger(BlockGenerator.class);
 
@@ -173,6 +174,7 @@ public final class BlockGenerator extends DataGenerator<Block> {
                     state.addProperty("solidBlocking", bs.getMaterial().isSolidBlocking());
                     state.addProperty("toolRequired", bs.requiresCorrectToolForDrops());
                     state.addProperty("randomlyTicks", bs.isRandomlyTicking());
+                    state.addProperty("pickBlockItem", Registry.ITEM.getKey(b.getCloneItemStack(EmptyBlockGetter.INSTANCE, BlockPos.ZERO, bs).getItem()).toString());
                     {
                         JsonObject sounds = new JsonObject();
                         sounds.addProperty("breakSound", soundNames.get(bs.getSoundType().getBreakSound()));
