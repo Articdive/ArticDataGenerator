@@ -174,7 +174,13 @@ public final class BlockGenerator extends DataGenerator<Block> {
                     state.addProperty("solidBlocking", bs.getMaterial().isSolidBlocking());
                     state.addProperty("toolRequired", bs.requiresCorrectToolForDrops());
                     state.addProperty("randomlyTicks", bs.isRandomlyTicking());
-                    state.addProperty("pickBlockItem", Registry.ITEM.getKey(b.getCloneItemStack(EmptyBlockGetter.INSTANCE, BlockPos.ZERO, bs).getItem()).toString());
+                    Item pickBlockItem;
+                    try {
+                        pickBlockItem = b.getCloneItemStack(EmptyBlockGetter.INSTANCE, BlockPos.ZERO, bs).getItem();
+                        state.addProperty("pickBlockItem", Registry.ITEM.getKey(pickBlockItem).toString());
+                    } catch (NullPointerException npe) {
+                        state.addProperty("pickBlockItem", Registry.ITEM.getKey(b.asItem()).toString());
+                    }
                     {
                         JsonObject sounds = new JsonObject();
                         sounds.addProperty("breakSound", soundNames.get(bs.getSoundType().getBreakSound()));
