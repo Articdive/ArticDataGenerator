@@ -21,6 +21,7 @@ public enum MinecraftVersion {
             DataGenType.MAP_COLORS,
             DataGenType.MATERIALS,
             DataGenType.MOB_EFFECTS,
+            DataGenType.PACKETS,
             DataGenType.PARTICLES,
             DataGenType.POTIONS,
             DataGenType.RECIPES,
@@ -45,7 +46,8 @@ public enum MinecraftVersion {
     V1_17_1(V1_17.supportedDataGenerators),
     V1_18(V1_17_1.supportedDataGenerators),
     V1_18_1(V1_18.supportedDataGenerators),
-    V1_18_2(V1_18_1.supportedDataGenerators);
+    V1_18_2(V1_18_1.supportedDataGenerators),
+    V1_19(V1_18_2.supportedDataGenerators);
 
     private final DataGenType[] supportedDataGenerators;
 

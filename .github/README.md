@@ -31,7 +31,7 @@ Adding to a Maven Project:
     <dependency>
         <groupId>de.articdive</groupId>
         <artifactId>articdata</artifactId>
-        <version>1.18.1-${COMMIT::8}</version>
+        <version>1.18.2-${COMMIT::8}</version>
     </dependency>
 </dependencies>
 ```
@@ -43,11 +43,11 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation("de.articdive:articdata:-${COMMIT::8}")
+    implementation("de.articdive:articdata:1.18.2-${COMMIT::8}")
 }
 ```
 Replace COMMIT::8 with the first 8 chars of the [**Generator** commit](https://github.com/Articdive/ArticDataGenerator/commits/main) you would like to use.  
-Please note that GitHub shows the first 7 chars.
+Please note that GitHub shows the first 7 chars in the list view.
 
 ## Usage
 
@@ -57,8 +57,8 @@ They include JSON files full of useful data to do with Minecraft.
 
 ## Supported Data
 We emit data in two ways:
-- One JSON Object with namespaced identifiers as keys for json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.18.1/1_18_1_blocks.json)
-- One JSON Array with many json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.18.1/1_18_1_map_colors.json)
+- One JSON Object with namespaced identifiers as keys for json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.18.2/1_18_2_blocks.json)
+- One JSON Array with many json objects. [Example](https://raw.githubusercontent.com/Articdive/ArticData/1.18.2/1_18_2_map_colors.json)
 
 If you require any data, open a GitHub Issue and specify the data you need.
 

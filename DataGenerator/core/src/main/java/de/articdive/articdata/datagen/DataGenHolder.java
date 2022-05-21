@@ -11,8 +11,11 @@ import java.util.Locale;
 import java.util.Map;
 import net.steppschuh.markdowngenerator.table.Table;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class DataGenHolder {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataGenHolder.class);
     private static final Map<DataGenType, DataGenerator<?>> generators = new LinkedHashMap<>();
 
     private DataGenHolder() {
@@ -53,7 +56,12 @@ public final class DataGenHolder {
             DataGenType type = entry.getKey();
             DataGenerator<?> generator = entry.getValue();
 
+            LOGGER.info("Generating {}.", type.name());
+            long currentTime = System.currentTimeMillis();
             JsonElement data = generator.generate();
+            long finishedTime = System.currentTimeMillis();
+            LOGGER.info("Finished generating {}. Took {}ms", type.name(), finishedTime - currentTime);
+
             fileOutputHandler.outputJson(data, type.getFileName());
         }
         StringBuilder TOC = new StringBuilder();

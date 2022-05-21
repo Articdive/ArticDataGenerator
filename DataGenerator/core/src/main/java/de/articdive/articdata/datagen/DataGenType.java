@@ -19,6 +19,7 @@ public enum DataGenType {
     MAP_COLORS("map_colors", "Map Colors", "MapColorGenerator"),
     MATERIALS("items", "Items", "MaterialGenerator"),
     MOB_EFFECTS("potion_effects", "Potion Effects", "MobEffectGenerator"),
+    PACKETS("packets", "Packets", "PacketGenerator"),
     PARTICLES("particles", "Particles", "ParticleGenerator"),
     POTIONS("potions", "Potions", "PotionGenerator"),
     RECIPES("recipes", "Recipes", "RecipeGenerator"),
