@@ -25,6 +25,6 @@ java {
 }
 
 minecraft {
-    version("1.19-pre1")
+    version("1.19")
     platform(org.spongepowered.gradle.vanilla.repository.MinecraftPlatform.SERVER)
 }
