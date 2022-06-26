@@ -1,6 +1,7 @@
 package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
 @GeneratorEntry(name = "Translation Key", supported = true)
@@ -50,6 +52,7 @@ public final class AttributeGenerator extends DataGenerator<Attribute> {
             if (a == null) {
                 continue;
             }
+            attribute.addProperty("id", Registry.ATTRIBUTE.getId(a));
             attribute.addProperty("mojangName", names.get(a));
             attribute.addProperty("translationKey", a.getDescriptionId());
             attribute.addProperty("defaultValue", a.getDefaultValue());
@@ -57,16 +60,8 @@ public final class AttributeGenerator extends DataGenerator<Attribute> {
             if (a instanceof RangedAttribute ra) {
                 // Unfortuantely get via reflection
                 JsonObject range = new JsonObject();
-                try {
-                    Field maxV = RangedAttribute.class.getDeclaredField("maxValue");
-                    maxV.setAccessible(true);
-                    range.addProperty("maxValue", maxV.getDouble(ra));
-                    Field minV = RangedAttribute.class.getDeclaredField("minValue");
-                    minV.setAccessible(true);
-                    range.addProperty("minValue", minV.getDouble(ra));
-                } catch (IllegalAccessException | NoSuchFieldException e) {
-                    LOGGER.error("Failed to get attribute ranges, skipping attrobite with ID '" + attributeRL + "'.", e);
-                }
+                range.addProperty("maxValue", ReflectionHelper.getHiddenField(double.class, "maxValue", RangedAttribute.class, ra));
+                range.addProperty("minValue", ReflectionHelper.getHiddenField(double.class, "minValue", RangedAttribute.class, ra));
                 attribute.add("range", range);
             }
 

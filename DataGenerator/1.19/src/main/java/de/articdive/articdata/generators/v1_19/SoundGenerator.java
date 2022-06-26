@@ -1,6 +1,7 @@
 package de.articdive.articdata.generators.v1_19;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.generators.v1_18.common.DataGenerator;
 import java.lang.reflect.Field;
@@ -55,6 +56,7 @@ public final class SoundGenerator extends DataGenerator<SoundEvent> {
 
             sound.addProperty("id", Registry.SOUND_EVENT.getId(se));
             sound.addProperty("mojangName", names.get(se));
+            sound.addProperty("range", ReflectionHelper.getHiddenField(float.class,"range", SoundEvent.class, se));
 
             sounds.add(soundRL.toString(), sound);
         }
