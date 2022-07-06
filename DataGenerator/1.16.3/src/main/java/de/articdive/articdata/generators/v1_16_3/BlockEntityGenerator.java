@@ -2,8 +2,8 @@ package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
 @GeneratorEntry(name = "Block IDs", supported = true)
-public final class BlockEntityGenerator extends DataGenerator<BlockEntityType> {
+public final class BlockEntityGenerator extends DataGenerator<BlockEntityType<?>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(BlockEntityGenerator.class);
 
     @Override

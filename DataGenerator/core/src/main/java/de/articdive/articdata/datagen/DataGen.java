@@ -27,12 +27,29 @@ public class DataGen {
         }
         MinecraftVersion minecraftVersion = MinecraftVersion.valueOf("V" + version);
         switch (minecraftVersion) {
-            case V1_18_2, V1_18_1, V1_18, V1_19 -> {
+            case V1_19 -> {
+                // Run 1.19
+                try {
+                    Class<?> dgCommon1_19 = Class.forName("de.articdive.articdata.generators.v1_19.common.Initializer");
+                    Method initMethod1_19 = dgCommon1_19.getDeclaredMethod("prepare");
+                    initMethod1_19.invoke(null);
+
+
+                    for (DataGenType supportedDataGenerator : minecraftVersion.getSupportedDataGenerators()) {
+                        DataGenHolder.addGenerator(supportedDataGenerator, minecraftVersion.lessAndEqualVersions());
+                    }
+                } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
+                         IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            case V1_18_2, V1_18_1, V1_18 -> {
                 // Run 1.18
                 try {
-                    Class<?> dgCommon1_18 = Class.forName("de.articdive.articdata.generators.v1_18.common.DataGenerator");
-                    Method prepareMethod1_18 = dgCommon1_18.getDeclaredMethod("prepare");
-                    prepareMethod1_18.invoke(null);
+                    Class<?> dgCommon1_18 = Class.forName("de.articdive.articdata.generators.v1_18.common.Initializer");
+                    Method initMethod1_18 = dgCommon1_18.getDeclaredMethod("prepare");
+                    initMethod1_18.invoke(null);
                 } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
                          IllegalAccessException e) {
                     e.printStackTrace();
@@ -44,9 +61,9 @@ public class DataGen {
             case V1_17_1, V1_17 -> {
                 // Run 1.17
                 try {
-                    Class<?> dgCommon1_17 = Class.forName("de.articdive.articdata.generators.v1_17.common.DataGenerator");
-                    Method prepareMethod1_17 = dgCommon1_17.getDeclaredMethod("prepare");
-                    prepareMethod1_17.invoke(null);
+                    Class<?> dgCommon1_17 = Class.forName("de.articdive.articdata.generators.v1_17.common.Initializer");
+                    Method initMethod1_17 = dgCommon1_17.getDeclaredMethod("prepare");
+                    initMethod1_17.invoke(null);
                 } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
                          IllegalAccessException e) {
                     e.printStackTrace();
@@ -58,9 +75,9 @@ public class DataGen {
             case V1_16_5, V1_16_4, V1_16_3 -> {
                 // Run 1.16_3
                 try {
-                    Class<?> dgCommon1_16_3 = Class.forName("de.articdive.articdata.generators.v1_16_3.common.DataGenerator");
-                    Method prepareMethod1_16_3 = dgCommon1_16_3.getDeclaredMethod("prepare");
-                    prepareMethod1_16_3.invoke(null);
+                    Class<?> dgCommon1_16_3 = Class.forName("de.articdive.articdata.generators.v1_16_3.common.Initializer");
+                    Method initMethod1_16_3 = dgCommon1_16_3.getDeclaredMethod("prepare");
+                    initMethod1_16_3.invoke(null);
                 } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
                          IllegalAccessException e) {
                     e.printStackTrace();
@@ -80,5 +97,6 @@ public class DataGen {
         DataGenHolder.runGenerators(new FileOutputHandler(version + "_", outputFolder));
 
         LOGGER.info("Output data in: " + outputFolder.getAbsolutePath());
+        System.exit(0);
     }
 }

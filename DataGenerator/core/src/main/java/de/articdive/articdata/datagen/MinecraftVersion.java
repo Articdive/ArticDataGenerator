@@ -46,8 +46,14 @@ public enum MinecraftVersion {
     V1_17_1(V1_17.supportedDataGenerators),
     V1_18(V1_17_1.supportedDataGenerators),
     V1_18_1(V1_18.supportedDataGenerators),
-    V1_18_2(V1_18_1.supportedDataGenerators),
-    V1_19(V1_18_2.supportedDataGenerators);
+    V1_18_2(copyAppend(V1_18_1.supportedDataGenerators, new DataGenType[]{DataGenType.WORLDGEN_TAGS})),
+    V1_19(copyAppend(V1_18_2.supportedDataGenerators, new DataGenType[]{
+            DataGenType.BANNER_PATTERN_TAGS,
+            DataGenType.CAT_VARIANT_TAGS,
+            DataGenType.INSTRUMENT_TAGS,
+            DataGenType.PAINTING_VARIANT_TAGS,
+            DataGenType.POI_TYPE_TAGS
+    }));
 
     private final DataGenType[] supportedDataGenerators;
 

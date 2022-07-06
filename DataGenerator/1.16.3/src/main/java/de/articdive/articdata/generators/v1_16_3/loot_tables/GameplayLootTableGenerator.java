@@ -1,13 +1,13 @@
 package de.articdive.articdata.generators.v1_16_3.loot_tables;
 
 import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.FileOutputHandler;
 import de.articdive.articdata.datagen.annotations.NoGeneratorEntries;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import de.articdive.articdata.generators.v1_16_3.common.Initializer;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +25,7 @@ public final class GameplayLootTableGenerator extends DataGenerator<Void> {
 
     @Override
     public JsonObject generate() {
-        File lootTablesFolder = new File(dataFolder, "loot_tables");
+        File lootTablesFolder = new File(Initializer.DATA_FOLDER_1_16_3, "loot_tables");
         File gameplayTables = new File(lootTablesFolder, "gameplay");
         File[] listedFiles = gameplayTables.listFiles();
         if (listedFiles != null) {
@@ -42,9 +42,9 @@ public final class GameplayLootTableGenerator extends DataGenerator<Void> {
                     continue;
                 }
                 JsonObject gameplayLootTable;
-                try {
-                    gameplayLootTable = FileOutputHandler.GSON.fromJson(new JsonReader(new FileReader(file)), JsonObject.class);
-                } catch (FileNotFoundException e) {
+                try (FileReader reader = new FileReader(file)){
+                    gameplayLootTable = FileOutputHandler.GSON.fromJson(reader, JsonObject.class);
+                } catch (IOException e) {
                     LOGGER.error("Failed to read gameplay loot table located at '" + file + "'.", e);
                     continue;
                 }

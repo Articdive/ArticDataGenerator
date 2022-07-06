@@ -3,7 +3,7 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import de.articdive.articdata.datagen.DataGenerator;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ScanResult;
 import java.lang.reflect.Field;

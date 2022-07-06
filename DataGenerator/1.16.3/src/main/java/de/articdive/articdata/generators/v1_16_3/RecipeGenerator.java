@@ -3,9 +3,10 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.FileOutputHandler;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
+import de.articdive.articdata.generators.v1_16_3.common.Initializer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -32,7 +33,7 @@ public final class RecipeGenerator extends DataGenerator<Void> {
 
     @Override
     public JsonElement generate() {
-        File recipesFolder = new File(dataFolder, "recipes");
+        File recipesFolder = new File(Initializer.DATA_FOLDER_1_16_3, "recipes");
 
         List<File> children = new ArrayList<>(Arrays.stream(Objects.requireNonNull(recipesFolder.listFiles())).sorted(Comparator.comparing(File::getName)).toList());
         JsonObject recipes = new JsonObject();

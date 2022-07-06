@@ -1,8 +1,8 @@
 package de.articdive.articdata.generators.v1_18_2;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_17.common.DataGenerator;
 import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;

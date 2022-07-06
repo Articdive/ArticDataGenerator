@@ -1,8 +1,8 @@
 package de.articdive.articdata.generators.v1_17;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_17.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;

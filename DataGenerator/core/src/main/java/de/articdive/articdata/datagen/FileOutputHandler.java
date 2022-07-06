@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,37 +45,31 @@ public final class FileOutputHandler {
 
     private void outputJson(JsonElement output, String fileName, File outputDirectory) {
         fileName = versionPrefix + fileName + ".json";
-        try {
-            Writer writer = new FileWriter(new File(outputDirectory, fileName), false);
+        try (Writer writer = new FileWriter(new File(outputDirectory, fileName), StandardCharsets.UTF_8)) {
             GSON.toJson(output, writer);
             writer.flush();
-            writer.close();
         } catch (IOException e) {
             LOGGER.error("Something went wrong while writing data to " + fileName + ".", e);
         }
     }
 
     public void outputDocumentation(String documentation) {
-        String filename = "CONTENT_DOCUMENTATION.md";
-        try {
-            Writer writer = new FileWriter(new File(outputDirectory, filename), false);
+        String fileName = "CONTENT_DOCUMENTATION.md";
+        try (Writer writer = new FileWriter(new File(outputDirectory, fileName), StandardCharsets.UTF_8, false)) {
             writer.write(documentation);
             writer.flush();
-            writer.close();
         } catch (IOException e) {
-            LOGGER.error("Something went wrong while writing the content documentation to " + filename + ".", e);
+            LOGGER.error("Something went wrong while writing the content documentation to " + fileName + ".", e);
         }
     }
 
     public void outputTOC(String documentation) {
-        String filename = "TOC.md";
-        try {
-            Writer writer = new FileWriter(new File(outputDirectory, filename), false);
+        String fileName = "TOC.md";
+        try (Writer writer = new FileWriter(new File(outputDirectory, fileName), StandardCharsets.UTF_8, false)) {
             writer.write(documentation);
             writer.flush();
-            writer.close();
         } catch (IOException e) {
-            LOGGER.error("Something went wrong while writing the table of contents to " + filename + ".", e);
+            LOGGER.error("Something went wrong while writing the table of contents to " + fileName + ".", e);
         }
     }
 }

@@ -33,6 +33,12 @@ public enum DataGenType {
     FLUID_TAGS("tags/fluid_tags", "Fluid Tags", "tags.FluidTagGenerator"),
     GAMEEVENT_TAGS("tags/gameplay_tags", "Gameplay Tags", "tags.GameEventTagGenerator"), // Added in 1.17
     ITEM_TAGS("tags/item_tags", "Item Tags", "tags.ItemTagGenerator"),
+    WORLDGEN_TAGS("tags/worldgen_tags", "World Generation Tags", "tags.WorldgenTagGenerator"), // Added in 1.18,2
+    BANNER_PATTERN_TAGS("tags/banner_pattern_tags", "Banner Pattern Tags", "tags.BannerPatternTagGenerator"), // Added in 1.19
+    CAT_VARIANT_TAGS("tags/cat_variant_tags", "Cat Variant Tags", "tags.CatVariantTagGenerator"), // Added in 1.19
+    INSTRUMENT_TAGS("tags/instrument_tags", "Instrument Tags", "tags.InstrumentTagGenerator"), // Added in 1.19
+    PAINTING_VARIANT_TAGS("tags/painting_variant_tags", "Painting Variant Tags", "tags.PaintingVariantTagGenerator"), // Added in 1.19
+    POI_TYPE_TAGS("tags/poi_type_tags", "Point of Interest Type Tags", "tags.POITypeTagGenerator"), // Added in 1.19
 
     BLOCK_LOOT_TABLES("loot_tables/block_loot_tables", "Block Loot Tables", "loot_tables.BlockLootTableGenerator"),
     CHEST_LOOT_TABLES("loot_tables/chest_loot_tables", "Chest Loot Tables", "loot_tables.ChestLootTableGenerator"),

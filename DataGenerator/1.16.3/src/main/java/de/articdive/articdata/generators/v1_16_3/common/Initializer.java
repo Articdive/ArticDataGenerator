@@ -1,18 +1,18 @@
 package de.articdive.articdata.generators.v1_16_3.common;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import net.minecraft.data.Main;
 import net.minecraft.server.Bootstrap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+public final class Initializer {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Initializer.class);
 
-public abstract class DataGenerator<T> extends de.articdive.articdata.datagen.DataGenerator<T> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataGenerator.class);
-    protected static File dataFolder;
-    protected static File reportsFolder;
+    public static File DATA_FOLDER_1_16_3;
+    public static File REPORTS_FOLDER_1_16_3;
 
     public static void prepare() {
         Bootstrap.bootStrap();
@@ -25,14 +25,13 @@ public abstract class DataGenerator<T> extends de.articdive.articdata.datagen.Da
                     "--all",
                     "--output=" + tempDirFile
             });
-            // Delete tempFile when finished
             tempDirFile.deleteOnExit();
         } catch (IOException e) {
             LOGGER.error("Something went wrong while running Mojang's data generator.", e);
             return;
         }
         // Points to data/minecraft
-        dataFolder = new File(tempDirFile, "data" + File.separator + "minecraft");
-        reportsFolder = new File(tempDirFile, "reports");
+        DATA_FOLDER_1_16_3 = new File(tempDirFile, "data" + File.separator + "minecraft");
+        REPORTS_FOLDER_1_16_3 = new File(tempDirFile, "reports");
     }
 }

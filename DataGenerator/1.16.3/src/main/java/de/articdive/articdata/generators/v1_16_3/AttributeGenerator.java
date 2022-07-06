@@ -1,9 +1,9 @@
 package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.List;
 import net.minecraft.core.Registry;

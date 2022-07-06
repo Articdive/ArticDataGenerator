@@ -2,12 +2,11 @@ package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -72,7 +71,7 @@ public final class EnchantmentGenerator extends DataGenerator<Enchantment> {
 
             JsonArray incompatibleEnchaments = new JsonArray();
             // Compatabilities
-            for (Enchantment e1 : Registry.ENCHANTMENT.stream().filter(e1 -> !e.isCompatibleWith(e1) && e != e1).collect(Collectors.toList())) {
+            for (Enchantment e1 : Registry.ENCHANTMENT.stream().filter(e1 -> !e.isCompatibleWith(e1) && e != e1).toList()) {
                 ResourceLocation e1Key = Registry.ENCHANTMENT.getKey(e1);
                 if (e1Key != null) {
                     incompatibleEnchaments.add(e1Key.toString());

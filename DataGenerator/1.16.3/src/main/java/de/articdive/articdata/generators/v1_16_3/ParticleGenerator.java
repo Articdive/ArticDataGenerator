@@ -1,8 +1,8 @@
 package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
@@ -37,7 +37,7 @@ public final class ParticleGenerator extends DataGenerator<ParticleType<?>> {
 
     @Override
     public JsonObject generate() {
-        List<ResourceLocation> particleRLs = Registry.PARTICLE_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.PARTICLE_TYPE.getId(Registry.PARTICLE_TYPE.get(value)))).toList();;
+        List<ResourceLocation> particleRLs = Registry.PARTICLE_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.PARTICLE_TYPE.getId(Registry.PARTICLE_TYPE.get(value)))).toList();
         JsonObject particles = new JsonObject();
 
         for (ResourceLocation particleRL : particleRLs) {

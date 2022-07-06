@@ -3,9 +3,9 @@ package de.articdive.articdata.generators.v1_16_3;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
@@ -65,7 +65,7 @@ public final class MaterialGenerator extends DataGenerator<Item> {
 
     @Override
     public JsonObject generate() {
-        List<ResourceLocation> itemRLs = Registry.ITEM.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.ITEM.getId(Registry.ITEM.get(value)))).toList();;
+        List<ResourceLocation> itemRLs = Registry.ITEM.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.ITEM.getId(Registry.ITEM.get(value)))).toList();
         JsonObject items = new JsonObject();
 
         for (ResourceLocation itemRL : itemRLs) {

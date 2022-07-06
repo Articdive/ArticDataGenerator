@@ -4,8 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.DataGenHolder;
 import de.articdive.articdata.datagen.DataGenType;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Comparator;
@@ -62,7 +62,7 @@ public final class EntityGenerator extends DataGenerator<EntityType<?>> {
     public JsonObject generate() {
         Map<EntityDataSerializer<?>, String> edsNames = (Map<EntityDataSerializer<?>, String>) DataGenHolder.getNameMap(DataGenType.ENTITY_DATA_SERIALIZERS);
 
-        List<ResourceLocation> entityRLs = Registry.ENTITY_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.ENTITY_TYPE.getId(Registry.ENTITY_TYPE.get(value)))).toList();;
+        List<ResourceLocation> entityRLs = Registry.ENTITY_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.ENTITY_TYPE.getId(Registry.ENTITY_TYPE.get(value)))).toList();
         JsonObject entities = new JsonObject();
 
         for (ResourceLocation entityRL : entityRLs) {

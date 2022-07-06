@@ -1,9 +1,9 @@
 package de.articdive.articdata.generators.v1_19;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.ReflectionHelper;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_18.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
@@ -44,7 +44,7 @@ public final class SoundGenerator extends DataGenerator<SoundEvent> {
 
     @Override
     public JsonObject generate() {
-        List<ResourceLocation> soundRLs = Registry.SOUND_EVENT.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.SOUND_EVENT.getId(Registry.SOUND_EVENT.get(value)))).toList();;
+        List<ResourceLocation> soundRLs = Registry.SOUND_EVENT.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.SOUND_EVENT.getId(Registry.SOUND_EVENT.get(value)))).toList();
         JsonObject sounds = new JsonObject();
 
         for (ResourceLocation soundRL : soundRLs) {

@@ -1,19 +1,18 @@
 package de.articdive.articdata.generators.v1_16_3.loot_tables;
 
 import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.FileOutputHandler;
 import de.articdive.articdata.datagen.annotations.NoGeneratorEntries;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import de.articdive.articdata.generators.v1_16_3.common.Initializer;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @NoGeneratorEntries
 public final class BlockLootTableGenerator extends DataGenerator<Void> {
@@ -26,7 +25,7 @@ public final class BlockLootTableGenerator extends DataGenerator<Void> {
 
     @Override
     public JsonObject generate() {
-        File lootTablesFolder = new File(dataFolder, "loot_tables");
+        File lootTablesFolder = new File(Initializer.DATA_FOLDER_1_16_3, "loot_tables");
         File blockTables = new File(lootTablesFolder, "blocks");
 
         File[] listedFiles = blockTables.listFiles();
@@ -44,9 +43,9 @@ public final class BlockLootTableGenerator extends DataGenerator<Void> {
                     continue;
                 }
                 JsonObject blockLootTable;
-                try {
-                    blockLootTable = FileOutputHandler.GSON.fromJson(new JsonReader(new FileReader(file)), JsonObject.class);
-                } catch (FileNotFoundException e) {
+                try (FileReader reader = new FileReader(file)){
+                    blockLootTable = FileOutputHandler.GSON.fromJson(reader, JsonObject.class);
+                } catch (IOException e) {
                     LOGGER.error("Failed to read block loot table located at '" + file + "'.", e);
                     continue;
                 }

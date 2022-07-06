@@ -2,8 +2,8 @@ package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.util.Arrays;
 import java.util.Comparator;
 import net.minecraft.sounds.SoundSource;

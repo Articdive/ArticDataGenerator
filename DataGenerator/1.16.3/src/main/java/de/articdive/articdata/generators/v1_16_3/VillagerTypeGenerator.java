@@ -1,8 +1,8 @@
 package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
@@ -36,7 +36,7 @@ public final class VillagerTypeGenerator extends DataGenerator<VillagerType> {
 
     @Override
     public JsonObject generate() {
-        List<ResourceLocation> villagerTypeRLs = Registry.VILLAGER_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.VILLAGER_TYPE.getId(Registry.VILLAGER_TYPE.get(value)))).toList();;
+        List<ResourceLocation> villagerTypeRLs = Registry.VILLAGER_TYPE.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.VILLAGER_TYPE.getId(Registry.VILLAGER_TYPE.get(value)))).toList();
         JsonObject villagerTypes = new JsonObject();
 
         for (ResourceLocation villagerTypeRL : villagerTypeRLs) {

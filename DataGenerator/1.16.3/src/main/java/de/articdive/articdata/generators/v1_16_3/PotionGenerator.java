@@ -1,8 +1,8 @@
 package de.articdive.articdata.generators.v1_16_3;
 
 import com.google.gson.JsonObject;
+import de.articdive.articdata.datagen.DataGenerator;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
-import de.articdive.articdata.generators.v1_16_3.common.DataGenerator;
 import java.lang.reflect.Field;
 import java.util.Comparator;
 import java.util.List;
@@ -37,7 +37,7 @@ public final class PotionGenerator extends DataGenerator<Potion> {
 
     @Override
     public JsonObject generate() {
-        List<ResourceLocation> effectRLs = Registry.POTION.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.POTION.getId(Registry.POTION.get(value)))).toList();;
+        List<ResourceLocation> effectRLs = Registry.POTION.keySet().stream().sorted(Comparator.comparingInt(value -> Registry.POTION.getId(Registry.POTION.get(value)))).toList();
         JsonObject potions = new JsonObject();
 
         for (ResourceLocation effectRL : effectRLs) {
