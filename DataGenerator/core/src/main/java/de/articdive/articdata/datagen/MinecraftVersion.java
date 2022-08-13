@@ -56,7 +56,9 @@ public enum MinecraftVersion {
             DataGenType.POI_TYPE_TAGS,
             DataGenType.STRUCTURE_TAGS,
             DataGenType.WORLD_PRESET_TAGS
-    }));
+    })),
+    V1_19_1(V1_19.supportedDataGenerators),
+    V1_19_2(V1_19_1.supportedDataGenerators);
 
     private final DataGenType[] supportedDataGenerators;
 
