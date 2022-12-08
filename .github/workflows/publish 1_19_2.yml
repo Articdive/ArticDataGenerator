@@ -21,7 +21,7 @@ jobs:
         run: "echo \"-${GITHUB_SHA::8}\" >> git_reference_id.txt"
 
       - name: Generate 1.19.2 data
-        run: gradle clean cleanAllMinecraft generateData_1.19.2
+        run: sudo gradle clean cleanAllMinecraft generateData_1.19.2
 
       - name: Push 1.19.2 Data
         uses: cpina/github-action-push-to-another-repository@v1.5.1

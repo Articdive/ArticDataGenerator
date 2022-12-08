@@ -1,4 +1,4 @@
-name: Publish 1.19.2 To GitHub Repository
+name: Publish 1.19.3 To GitHub Repository
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         run: "echo \"-${GITHUB_SHA::8}\" >> git_reference_id.txt"
 
       - name: Generate 1.19.3 data
-        run: gradle clean cleanAllMinecraft generateData_1.19.3
+        run: sudo gradle clean cleanAllMinecraft generateData_1.19.3
 
       - name: Push 1.19.3 Data
         uses: cpina/github-action-push-to-another-repository@v1.5.1
