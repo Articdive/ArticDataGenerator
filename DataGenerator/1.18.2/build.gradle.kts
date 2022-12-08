@@ -19,7 +19,7 @@ configurations {
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
-        vendor.set(JvmVendorSpec.ADOPTOPENJDK)
+        vendor.set(JvmVendorSpec.ADOPTIUM)
     }
 }
 
