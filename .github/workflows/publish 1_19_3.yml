@@ -1,4 +1,4 @@
-name: Publish 1.18.1 To GitHub Repository
+name: Publish 1.19.2 To GitHub Repository
 
 on:
   push:
@@ -20,16 +20,16 @@ jobs:
       - name: Inject Commit Revision
         run: "echo \"-${GITHUB_SHA::8}\" >> git_reference_id.txt"
 
-      - name: Generate 1.18.1 data
-        run: gradle clean cleanAllMinecraft generateData_1.18.1
+      - name: Generate 1.19.3 data
+        run: gradle clean cleanAllMinecraft generateData_1.19.3
 
-      - name: Push 1.18.1 Data
+      - name: Push 1.19.3 Data
         uses: cpina/github-action-push-to-another-repository@v1.5.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: "ArticData/1.18.1/"
+          source-directory: "ArticData/1.19.3/"
           user-email: "articdata@bot.io"
           destination-github-username: "Articdive"
           destination-repository-name: "ArticData"
-          target-branch: "1.18.1"
+          target-branch: "1.19.3"

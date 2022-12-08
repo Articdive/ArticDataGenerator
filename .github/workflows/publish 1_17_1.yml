@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2.4.0
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2.3.1
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          java-version: '11'
+          distribution: 'adopt'
 
       - name: Inject Commit Revision
         run: "echo \"-${GITHUB_SHA::8}\" >> git_reference_id.txt"
@@ -24,7 +24,7 @@ jobs:
         run: gradle clean cleanAllMinecraft generateData_1.17.1
 
       - name: Push 1.17.1 Data
-        uses: cpina/github-action-push-to-another-repository@v1.3
+        uses: cpina/github-action-push-to-another-repository@v1.5.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
