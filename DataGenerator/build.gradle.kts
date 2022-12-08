@@ -10,7 +10,7 @@ subprojects {
 
     dependencies {
         // SLF4J is the base logger for most libraries.
-        "implementation"("org.slf4j:slf4j-api:1.8.0-beta4")
+        "implementation"("org.slf4j:slf4j-api:2.0.5")
         "implementation"("com.google.code.gson:gson:2.8.8")
         "implementation"("io.github.classgraph:classgraph:4.8.129")
         "implementation"("com.github.Steppschuh:Java-Markdown-Generator:master-SNAPSHOT")

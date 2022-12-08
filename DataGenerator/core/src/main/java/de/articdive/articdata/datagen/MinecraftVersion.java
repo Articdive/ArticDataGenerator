@@ -58,7 +58,8 @@ public enum MinecraftVersion {
             DataGenType.WORLD_PRESET_TAGS
     })),
     V1_19_1(V1_19.supportedDataGenerators),
-    V1_19_2(V1_19_1.supportedDataGenerators);
+    V1_19_2(V1_19_1.supportedDataGenerators),
+    V1_19_3(V1_19_2.supportedDataGenerators);
 
     private final DataGenType[] supportedDataGenerators;
 

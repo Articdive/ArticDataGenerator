@@ -27,6 +27,22 @@ public class DataGen {
         }
         MinecraftVersion minecraftVersion = MinecraftVersion.valueOf("V" + version);
         switch (minecraftVersion) {
+            case V1_19_3 -> {
+                // Run 1.19
+                try {
+                    Class<?> dgCommon1_19_3 = Class.forName("de.articdive.articdata.generators.v1_19_3.common.Initializer");
+                    Method initMethod1_19_3 = dgCommon1_19_3.getDeclaredMethod("prepare");
+                    initMethod1_19_3.invoke(null);
+
+
+                    for (DataGenType supportedDataGenerator : minecraftVersion.getSupportedDataGenerators()) {
+                        DataGenHolder.addGenerator(supportedDataGenerator, minecraftVersion.lessAndEqualVersions());
+                    }
+                } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
+                         IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
             case V1_19_2, V1_19_1, V1_19 -> {
                 // Run 1.19
                 try {
@@ -42,7 +58,6 @@ public class DataGen {
                          IllegalAccessException e) {
                     e.printStackTrace();
                 }
-
             }
             case V1_18_2, V1_18_1, V1_18 -> {
                 // Run 1.18
