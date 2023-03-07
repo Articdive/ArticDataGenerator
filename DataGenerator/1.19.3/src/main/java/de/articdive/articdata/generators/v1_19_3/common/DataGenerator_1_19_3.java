@@ -18,7 +18,6 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
 
@@ -27,7 +26,6 @@ public abstract class DataGenerator_1_19_3<T> extends DataGenerator<T> {
     protected static Registry<Block> BLOCK_REGISTRY = getRegistry(Registries.BLOCK);
     protected static Registry<BlockEntityType<?>> BLOCK_ENTITY_REGISTRY = getRegistry(Registries.BLOCK_ENTITY_TYPE);
     protected static Registry<ResourceLocation> CUSTOM_STAT_REGISTRY = getRegistry(Registries.CUSTOM_STAT);
-    protected static Registry<DimensionType> DIMENSION_TYPE_REGISTRY = getRegistry(Registries.DIMENSION_TYPE);
     protected static Registry<Enchantment> ENCHANTMENT_REGISTRY = getRegistry(Registries.ENCHANTMENT);
     protected static Registry<EntityType<?>> ENTITY_TYPE_REGISTRY = getRegistry(Registries.ENTITY_TYPE);
     protected static Registry<Fluid> FLUID_REGISTRY = getRegistry(Registries.FLUID);

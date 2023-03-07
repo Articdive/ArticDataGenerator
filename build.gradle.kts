@@ -101,7 +101,7 @@ fun getVersionsRequiredForCompile(version: String): ArrayList<String> {
             return arrayListOf("1.19", "1.18.2", "1.18", "1.17", "1.16.3")
         }
         "1.19.3" -> {
-            return arrayListOf("1.19.3", "1.19", "1.18.2", "1.18", "1.17", "1.16.3")
+            return arrayListOf("1.19.3")
         }
         // Attempt with 1.16.3
         else -> {
