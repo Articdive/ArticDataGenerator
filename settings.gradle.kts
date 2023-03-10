@@ -23,3 +23,7 @@ pluginManagement {
         maven(url = "https://repo.spongepowered.org/repository/maven-public/")
     }
 }
+// Include JDK Resolver
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version("0.4.0")
+}
