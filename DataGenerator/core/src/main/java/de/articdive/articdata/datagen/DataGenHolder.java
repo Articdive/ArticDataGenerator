@@ -1,6 +1,7 @@
 package de.articdive.articdata.datagen;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import de.articdive.articdata.datagen.annotations.GeneratorEntry;
 import de.articdive.articdata.datagen.annotations.NoGeneratorEntries;
 import java.lang.reflect.InvocationTargetException;
@@ -59,6 +60,9 @@ public final class DataGenHolder {
             LOGGER.info("Generating {}.", type.name());
             long currentTime = System.currentTimeMillis();
             JsonElement data = generator.generate();
+            if (data instanceof JsonObject jsonObject) {
+                data = JsonUtil.sortAlphabetically(jsonObject);
+            }
             long finishedTime = System.currentTimeMillis();
             LOGGER.info("Finished generating {}. Took {}ms", type.name(), finishedTime - currentTime);
 
