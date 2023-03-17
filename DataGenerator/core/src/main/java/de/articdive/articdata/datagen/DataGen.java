@@ -27,8 +27,8 @@ public class DataGen {
         }
         MinecraftVersion minecraftVersion = MinecraftVersion.valueOf("V" + version);
         switch (minecraftVersion) {
-            case V1_19_3 -> {
-                // Run 1.19
+            case V1_19_4, V1_19_3 -> {
+                // Run 1.19.3
                 try {
                     Class<?> dgCommon1_19_3 = Class.forName("de.articdive.articdata.generators.v1_19_3.common.Initializer");
                     Method initMethod1_19_3 = dgCommon1_19_3.getDeclaredMethod("prepare");
