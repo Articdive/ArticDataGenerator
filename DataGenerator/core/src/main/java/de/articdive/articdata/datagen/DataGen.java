@@ -27,7 +27,7 @@ public class DataGen {
         }
         MinecraftVersion minecraftVersion = MinecraftVersion.valueOf("V" + version);
         switch (minecraftVersion) {
-            case V1_19_4, V1_19_3 -> {
+            case V1_20, V1_19_4, V1_19_3 -> {
                 // Run 1.19.3
                 try {
                     Class<?> dgCommon1_19_3 = Class.forName("de.articdive.articdata.generators.v1_19_3.common.Initializer");
@@ -100,6 +100,9 @@ public class DataGen {
                 for (DataGenType supportedDataGenerator : minecraftVersion.getSupportedDataGenerators()) {
                     DataGenHolder.addGenerator(supportedDataGenerator, minecraftVersion.lessAndEqualVersions());
                 }
+            }
+            default -> {
+                throw new IllegalStateException("Version was not added into the DataGen correctly");
             }
         }
 

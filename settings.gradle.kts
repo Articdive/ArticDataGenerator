@@ -20,6 +20,8 @@ include("DataGenerator:1.19.3")
 
 include("DataGenerator:1.19.4")
 
+include("DataGenerator:1.20")
+
 pluginManagement {
     repositories {
         maven(url = "https://repo.spongepowered.org/repository/maven-public/")
