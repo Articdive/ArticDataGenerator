@@ -61,7 +61,8 @@ public enum MinecraftVersion {
     V1_19_2(V1_19_1.supportedDataGenerators),
     V1_19_3(V1_19_2.supportedDataGenerators),
     V1_19_4(V1_19_3.supportedDataGenerators),
-    V1_20(V1_19_4.supportedDataGenerators);
+    V1_20(V1_19_4.supportedDataGenerators),
+    V1_20_1(V1_20.supportedDataGenerators);
 
     private final DataGenType[] supportedDataGenerators;
 

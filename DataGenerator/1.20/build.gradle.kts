@@ -22,7 +22,7 @@ java {
 }
 
 minecraft {
-    version("1.20-pre4")
+    version("1.20")
     platform(org.spongepowered.gradle.vanilla.repository.MinecraftPlatform.SERVER)
     runs {
         server()
