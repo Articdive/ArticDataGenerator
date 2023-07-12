@@ -97,28 +97,34 @@ public final class EntityGenerator extends DataGenerator_1_19_3<EntityType<?>> {
             // entity.addProperty("fixed", et.getDimensions().fixed); also basically useless
 
             // Use some reflection to find some metadata properties we need
-            JsonArray metadata = new JsonArray();
-            for (Field declaredField : entityClass.getDeclaredFields()) {
-                JsonObject entityMetadata = new JsonObject();
-                if (!EntityDataAccessor.class.isAssignableFrom(declaredField.getType())) {
-                    continue;
-                }
-                try {
-                    declaredField.setAccessible(true);
-                    EntityDataAccessor<?> eda = (EntityDataAccessor<?>) declaredField.get(null);
-                    eda.getSerializer();
+            {
+                JsonArray metadata = new JsonArray();
+                Class<?> currentClass = entityClass;
+                do {
+                    System.out.println(currentClass);
+                    for (Field declaredField : currentClass.getDeclaredFields()) {
+                        JsonObject entityMetadata = new JsonObject();
+                        if (!EntityDataAccessor.class.isAssignableFrom(declaredField.getType())) {
+                            continue;
+                        }
+                        System.out.println(declaredField.getName());
+                        try {
+                            declaredField.setAccessible(true);
+                            EntityDataAccessor<?> eda = (EntityDataAccessor<?>) declaredField.get(null);
+                            eda.getSerializer();
 
-                    entityMetadata.addProperty("mojangName", declaredField.getName().toLowerCase());
-                    entityMetadata.addProperty("id", eda.getId());
-                    entityMetadata.addProperty("serializer", edsNames.get(eda.getSerializer()));
+                            entityMetadata.addProperty("mojangName", declaredField.getName().toLowerCase());
+                            entityMetadata.addProperty("id", eda.getId());
+                            entityMetadata.addProperty("serializer", edsNames.get(eda.getSerializer()));
 
-                    metadata.add(entityMetadata);
-                } catch (IllegalAccessException e) {
-                    LOGGER.error("Failed to access entity metadata for '" + entityRL.toString() + "'.", e);
-                }
-
+                            metadata.add(entityMetadata);
+                        } catch (IllegalAccessException e) {
+                            LOGGER.error("Failed to access entity metadata for '" + entityRL.toString() + "'.", e);
+                        }
+                    }
+                } while ((currentClass = currentClass.getSuperclass()) != null);
+                entity.add("metadata", metadata);
             }
-            entity.add("metadata", metadata);
 
             entities.add(entityRL.toString(), entity);
         }

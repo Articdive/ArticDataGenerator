@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 @GeneratorEntry(name = "Protocol ID", supported = true)
 @GeneratorEntry(name = "Namespace ID", supported = true)
 @GeneratorEntry(name = "Mojang Name", supported = true)
+@GeneratorEntry(name = "Potion Effects", supported = true)
 public final class PotionGenerator extends DataGenerator<Potion> {
     private static final Logger LOGGER = LoggerFactory.getLogger(PotionGenerator.class);
 
