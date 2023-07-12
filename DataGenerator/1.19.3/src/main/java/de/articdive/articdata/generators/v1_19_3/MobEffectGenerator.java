@@ -65,7 +65,7 @@ public final class MobEffectGenerator extends DataGenerator_1_19_3<MobEffect> {
                 AttributeModifier modifier = attributeModifierEntry.getValue();
 
                 JsonObject attributeModifier = new JsonObject();
-                attributeModifier.addProperty("attribute", attribute.getDescriptionId());
+                attributeModifier.addProperty("attribute", ATTRIBUTE_REGISTRY.getKey(attribute).toString());
                 attributeModifier.addProperty("uuid", modifier.getId().toString());
                 attributeModifier.addProperty("value", modifier.getAmount());
                 attributeModifier.addProperty("operation", modifier.getOperation().toString());
