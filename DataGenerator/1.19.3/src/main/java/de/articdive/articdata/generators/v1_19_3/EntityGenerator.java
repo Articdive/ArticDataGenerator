@@ -101,13 +101,11 @@ public final class EntityGenerator extends DataGenerator_1_19_3<EntityType<?>> {
                 JsonArray metadata = new JsonArray();
                 Class<?> currentClass = entityClass;
                 do {
-                    System.out.println(currentClass);
                     for (Field declaredField : currentClass.getDeclaredFields()) {
                         JsonObject entityMetadata = new JsonObject();
                         if (!EntityDataAccessor.class.isAssignableFrom(declaredField.getType())) {
                             continue;
                         }
-                        System.out.println(declaredField.getName());
                         try {
                             declaredField.setAccessible(true);
                             EntityDataAccessor<?> eda = (EntityDataAccessor<?>) declaredField.get(null);

@@ -29,7 +29,8 @@ tasks {
                 filter(
                     org.apache.tools.ant.filters.ReplaceTokens::class, "tokens" to mapOf(
                         "mcVersion" to mcVersion,
-                        "mcVersionGit" to mcVersion + if (rootDir.resolve("git_reference_id.txt").exists()) rootDir.resolve("git_reference_id.txt").readText(Charsets.UTF_8).trim() else "4661a768" // This should fail the GitHub CI, as the repo does not redeploy versions.
+                        "mcVersionGit" to mcVersion + if (rootDir.resolve("git_reference_id.txt").exists()) rootDir.resolve("git_reference_id.txt").readText(Charsets.UTF_8)
+                            .trim() else "4661a768" // This should fail the GitHub CI, as the repo does not redeploy versions.
                     )
                 )
                 exclude("gradle/wrapper/gradle-wrapper.jar")
@@ -88,27 +89,41 @@ fun getVersionsRequiredForCompile(version: String): ArrayList<String> {
         }
         // 1.18 (uses some 1.16.3, 1.17 generators
         "1.18",
-        "1.18.1"-> {
+        "1.18.1" -> {
             return arrayListOf("1.18", "1.17", "1.16.3")
         }
         // 1.18.2 is special because of changes to Biome categories :(.
         "1.18.2" -> {
             return arrayListOf("1.18.2", "1.18", "1.17", "1.16.3")
         }
+
         "1.19",
         "1.19.1",
         "1.19.2" -> {
             return arrayListOf("1.19", "1.18.2", "1.18", "1.17", "1.16.3")
         }
+
         "1.19.3" -> {
             return arrayListOf("1.19.3")
         }
+
         "1.19.4" -> {
             return arrayListOf("1.19.4", "1.19.3")
         }
+
         "1.20",
-        "1.20.1" -> {
+        "1.20.1",
+        -> {
             return arrayListOf("1.20", "1.19.4", "1.19.3")
+        }
+
+        "1.20.2" -> {
+            return arrayListOf("1.20.2", "1.20", "1.19.4", "1.19.3")
+        }
+
+        "1.20.3",
+        "1.20.4" -> {
+            return arrayListOf("1.20.3", "1.20.2", "1.20", "1.19.4", "1.19.3")
         }
         // Attempt with 1.16.3
         else -> {
